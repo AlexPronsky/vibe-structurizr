@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  ai_arch:
+    image: structurizr/lite:latest
+    container_name: structurizr
+    ports:
+      - "8080:8080"
+    volumes:
+      - ${HOST_PROJECT_ROOT:-.}/structurizr:/usr/local/structurizr
+    environment:
+      - STRUCTURIZR_WORKSPACE=workspace

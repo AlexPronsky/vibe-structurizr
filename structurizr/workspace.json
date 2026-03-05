@@ -1,0 +1,2094 @@
+{
+  "configuration" : { },
+  "description" : "Description",
+  "documentation" : { },
+  "id" : 1,
+  "lastModifiedDate" : "2026-03-04T18:07:18Z",
+  "model" : {
+    "people" : [ {
+      "id" : "1",
+      "name" : "Хоббиты Шира",
+      "properties" : {
+        "structurizr.dsl.identifier" : "hobbits"
+      },
+      "relationships" : [ {
+        "description" : "Заходят в трактир",
+        "destinationId" : "20",
+        "id" : "39",
+        "sourceId" : "1",
+        "tags" : "Relationship",
+        "technology" : "HTTPS"
+      }, {
+        "description" : "Заходят в трактир",
+        "destinationId" : "21",
+        "id" : "40",
+        "sourceId" : "1",
+        "tags" : "Relationship",
+        "technology" : "HTTPS"
+      } ],
+      "tags" : "Element,Person,External"
+    }, {
+      "id" : "2",
+      "name" : "Следопыты Севера",
+      "properties" : {
+        "structurizr.dsl.identifier" : "rangers"
+      },
+      "relationships" : [ {
+        "description" : "Зажигают сигнальные огни",
+        "destinationId" : "6",
+        "id" : "34",
+        "sourceId" : "2",
+        "tags" : "Relationship",
+        "technology" : "HTTPS"
+      }, {
+        "description" : "Записывают задачи в Палантир",
+        "destinationId" : "5",
+        "id" : "36",
+        "sourceId" : "2",
+        "tags" : "Relationship",
+        "technology" : "HTTPS"
+      }, {
+        "description" : "Обращаются к магам Башни",
+        "destinationId" : "87",
+        "id" : "96",
+        "sourceId" : "2",
+        "tags" : "Relationship",
+        "technology" : "HTTPS"
+      } ],
+      "tags" : "Element,Person"
+    } ],
+    "properties" : {
+      "structurizr.groupSeparator" : "/"
+    },
+    "softwareSystems" : [ {
+      "documentation" : { },
+      "id" : "3",
+      "name" : "Библиотека Минас Тирита",
+      "properties" : {
+        "structurizr.dsl.identifier" : "minas_tirith_library"
+      },
+      "relationships" : [ {
+        "description" : "INF02. Свитки из Библиотеки",
+        "destinationId" : "109",
+        "id" : "114",
+        "sourceId" : "3",
+        "tags" : "Relationship,Dataflow"
+      }, {
+        "description" : "INF02. Свитки из Библиотеки",
+        "destinationId" : "93",
+        "id" : "115",
+        "linkedRelationshipId" : "114",
+        "sourceId" : "3"
+      } ],
+      "tags" : "Element,Software System,External"
+    }, {
+      "documentation" : { },
+      "id" : "4",
+      "name" : "Архивы Ривенделла",
+      "properties" : {
+        "structurizr.dsl.identifier" : "rivendell_archives"
+      },
+      "tags" : "Element,Software System,External"
+    }, {
+      "documentation" : { },
+      "id" : "5",
+      "name" : "Палантир Задач",
+      "properties" : {
+        "structurizr.dsl.identifier" : "task_palantir"
+      },
+      "tags" : "Element,Software System,External"
+    }, {
+      "description" : "Сигнальная система",
+      "documentation" : { },
+      "id" : "6",
+      "name" : "Огни Гондора",
+      "properties" : {
+        "structurizr.dsl.identifier" : "gondor_beacons"
+      },
+      "relationships" : [ {
+        "description" : "Передаёт мольбы путников",
+        "destinationId" : "22",
+        "id" : "35",
+        "sourceId" : "6",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      } ],
+      "tags" : "Element,Software System,External"
+    }, {
+      "description" : "Всевидящий шлюз магии",
+      "documentation" : { },
+      "id" : "7",
+      "name" : "Око Саурона",
+      "properties" : {
+        "structurizr.dsl.identifier" : "eye_of_sauron"
+      },
+      "relationships" : [ {
+        "description" : "Направляет запросы к Кольцам",
+        "destinationId" : "11",
+        "id" : "15",
+        "sourceId" : "7",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      }, {
+        "description" : "Направляет запросы к Истари",
+        "destinationId" : "8",
+        "id" : "16",
+        "sourceId" : "7",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      }, {
+        "description" : "INF04. Ответы мудрости Ока",
+        "destinationId" : "57",
+        "id" : "78",
+        "sourceId" : "7",
+        "tags" : "Relationship,Dataflow"
+      }, {
+        "description" : "INF04. Ответы мудрости Ока",
+        "destinationId" : "25",
+        "id" : "79",
+        "linkedRelationshipId" : "78",
+        "sourceId" : "7"
+      }, {
+        "description" : "INF05. Толкования Ока",
+        "destinationId" : "125",
+        "id" : "139",
+        "sourceId" : "7",
+        "tags" : "Relationship,Dataflow"
+      }, {
+        "description" : "INF05. Толкования Ока",
+        "destinationId" : "117",
+        "id" : "140",
+        "linkedRelationshipId" : "139",
+        "sourceId" : "7"
+      } ],
+      "tags" : "Element,Software System,External"
+    }, {
+      "description" : "Маги за Морем, доступные через палантиры",
+      "documentation" : { },
+      "id" : "8",
+      "name" : "Истари",
+      "properties" : {
+        "structurizr.dsl.identifier" : "istari"
+      },
+      "tags" : "Element,Software System,External"
+    }, {
+      "description" : "Древнее хранилище гномов (legacy)",
+      "documentation" : { },
+      "group" : "Подземные Хранилища",
+      "id" : "9",
+      "name" : "Копи Мории",
+      "properties" : {
+        "structurizr.dsl.identifier" : "mines_of_moria"
+      },
+      "tags" : "Element,Software System,External"
+    }, {
+      "description" : "Хранилище Подгорного Королевства",
+      "documentation" : { },
+      "group" : "Подземные Хранилища",
+      "id" : "10",
+      "name" : "Сокровищница Эребора",
+      "properties" : {
+        "structurizr.dsl.identifier" : "erebor_treasury"
+      },
+      "tags" : "Element,Software System,External"
+    }, {
+      "description" : "Магические артефакты в крепости",
+      "documentation" : { },
+      "group" : "Кузницы Средиземья",
+      "id" : "11",
+      "name" : "Кольца Власти",
+      "properties" : {
+        "structurizr.dsl.identifier" : "rings_of_power"
+      },
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Артефакты, доступные всем свободным народам",
+      "documentation" : { },
+      "group" : "Кузницы Средиземья",
+      "id" : "12",
+      "name" : "Эльфийские Клинки",
+      "properties" : {
+        "structurizr.dsl.identifier" : "elven_blades"
+      },
+      "tags" : "Element,Software System"
+    }, {
+      "documentation" : { },
+      "group" : "Кузницы Средиземья",
+      "id" : "13",
+      "name" : "Прорицатели Лориэна",
+      "properties" : {
+        "structurizr.dsl.identifier" : "lorien_seers"
+      },
+      "relationships" : [ {
+        "description" : "Добывают руду в Копях",
+        "destinationId" : "9",
+        "id" : "17",
+        "sourceId" : "13",
+        "tags" : "Relationship",
+        "technology" : "TCP"
+      }, {
+        "description" : "Добывают руду в Сокровищнице",
+        "destinationId" : "10",
+        "id" : "18",
+        "sourceId" : "13",
+        "tags" : "Relationship",
+        "technology" : "TCP"
+      }, {
+        "description" : "Отправляют пророчества Гонцам",
+        "destinationId" : "14",
+        "id" : "19",
+        "sourceId" : "13",
+        "tags" : "Relationship",
+        "technology" : "Kafka"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Срочная доставка пророчеств",
+      "documentation" : { },
+      "id" : "14",
+      "name" : "Быстрые Гонцы",
+      "properties" : {
+        "structurizr.dsl.identifier" : "swift_messengers"
+      },
+      "tags" : "Element,Software System,External"
+    }, {
+      "description" : "Пристанище путников",
+      "documentation" : { },
+      "id" : "20",
+      "name" : "Трактир «Гарцующий Пони»",
+      "properties" : {
+        "structurizr.dsl.identifier" : "prancing_pony"
+      },
+      "relationships" : [ {
+        "description" : "Передаёт мольбы путников",
+        "destinationId" : "22",
+        "id" : "41",
+        "sourceId" : "20",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      } ],
+      "tags" : "Element,Software System,External"
+    }, {
+      "description" : "Пристанище путников",
+      "documentation" : { },
+      "id" : "21",
+      "name" : "Трактир «Зелёный Дракон»",
+      "properties" : {
+        "structurizr.dsl.identifier" : "green_dragon"
+      },
+      "relationships" : [ {
+        "description" : "Передаёт мольбы путников",
+        "destinationId" : "22",
+        "id" : "42",
+        "sourceId" : "21",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      } ],
+      "tags" : "Element,Software System,External"
+    }, {
+      "description" : "Привратник входящих посланий",
+      "documentation" : { },
+      "id" : "22",
+      "name" : "Врата Мории",
+      "properties" : {
+        "structurizr.dsl.identifier" : "gates_of_moria"
+      },
+      "relationships" : [ {
+        "description" : "Передаёт мольбы путников",
+        "destinationId" : "25",
+        "id" : "43",
+        "sourceId" : "22",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      }, {
+        "description" : "Передаёт мольбы путников",
+        "destinationId" : "57",
+        "id" : "62",
+        "sourceId" : "22",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      } ],
+      "tags" : "Element,Software System,External"
+    }, {
+      "description" : "Разрешение проблем",
+      "documentation" : { },
+      "id" : "23",
+      "name" : "Совет Элронда",
+      "properties" : {
+        "structurizr.dsl.identifier" : "council_of_elrond"
+      },
+      "relationships" : [ {
+        "description" : "Направляет страждущих",
+        "destinationId" : "26",
+        "id" : "49",
+        "sourceId" : "23",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      } ],
+      "tags" : "Element,Software System,External"
+    }, {
+      "description" : "Дальновидение и дальнослышание",
+      "documentation" : { },
+      "id" : "24",
+      "name" : "Палантир Связи",
+      "properties" : {
+        "structurizr.dsl.identifier" : "seeing_stone"
+      },
+      "relationships" : [ {
+        "description" : "Передаёт речи совета",
+        "destinationId" : "27",
+        "id" : "51",
+        "sourceId" : "24",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      } ],
+      "tags" : "Element,Software System,External"
+    }, {
+      "containers" : [ {
+        "description" : "Совет мудрых энтов",
+        "documentation" : { },
+        "group" : "Цитадель Минас Тирита",
+        "id" : "57",
+        "name" : "Энты-Советники",
+        "properties" : {
+          "structurizr.dsl.identifier" : "ent_advisors.ent_core"
+        },
+        "relationships" : [ {
+          "description" : "Заглядывает в Зеркало",
+          "destinationId" : "28",
+          "id" : "64",
+          "sourceId" : "57",
+          "tags" : "Relationship",
+          "technology" : "REST/HTTPS"
+        }, {
+          "description" : "Обращается к Оку",
+          "destinationId" : "7",
+          "id" : "65",
+          "sourceId" : "57",
+          "tags" : "Relationship",
+          "technology" : "REST/HTTPS"
+        }, {
+          "description" : "Переходит через Мост",
+          "destinationId" : "58",
+          "id" : "66",
+          "sourceId" : "57",
+          "tags" : "Relationship",
+          "technology" : "REST/HTTPS"
+        }, {
+          "description" : "INF01. Ответы на мольбы путников",
+          "destinationId" : "22",
+          "id" : "72",
+          "sourceId" : "57",
+          "tags" : "Relationship,Dataflow"
+        }, {
+          "description" : "INF02. Ответы на вопросы Гэндальфа",
+          "destinationId" : "33",
+          "id" : "74",
+          "sourceId" : "57",
+          "tags" : "Relationship,Dataflow"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "Python"
+      }, {
+        "description" : "Посредник между мирами",
+        "documentation" : { },
+        "group" : "Цитадель Минас Тирита",
+        "id" : "58",
+        "name" : "Мост Казад-Дума",
+        "properties" : {
+          "structurizr.dsl.identifier" : "ent_advisors.khazad_dum_bridge"
+        },
+        "relationships" : [ {
+          "description" : "Запрашивает хроники",
+          "destinationId" : "29",
+          "id" : "67",
+          "sourceId" : "58",
+          "tags" : "Relationship",
+          "technology" : "REST/HTTPS"
+        }, {
+          "description" : "Запрашивает свитки с Переправы",
+          "destinationId" : "59",
+          "id" : "68",
+          "sourceId" : "58",
+          "tags" : "Relationship",
+          "technology" : "REST/HTTPS"
+        }, {
+          "description" : "INF05. Свитки хроник",
+          "destinationId" : "57",
+          "id" : "80",
+          "sourceId" : "58",
+          "tags" : "Relationship,Dataflow"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "Java"
+      }, {
+        "description" : "Переправа древних свитков",
+        "documentation" : { },
+        "group" : "Цитадель Минас Тирита",
+        "id" : "59",
+        "name" : "Переправа через Андуин",
+        "properties" : {
+          "structurizr.dsl.identifier" : "ent_advisors.anduin_crossing"
+        },
+        "relationships" : [ {
+          "description" : "Читает из Течения",
+          "destinationId" : "61",
+          "id" : "70",
+          "sourceId" : "59",
+          "tags" : "Relationship",
+          "technology" : "TCP"
+        }, {
+          "description" : "Прячет и достаёт из Тайника",
+          "destinationId" : "60",
+          "id" : "71",
+          "sourceId" : "59",
+          "tags" : "Relationship",
+          "technology" : "TCP"
+        }, {
+          "description" : "INF10. Переправленные свитки",
+          "destinationId" : "58",
+          "id" : "86",
+          "sourceId" : "59",
+          "tags" : "Relationship,Dataflow"
+        } ],
+        "tags" : "Element,Container,NotInProd",
+        "technology" : "Kafka Connect"
+      }, {
+        "description" : "Схрон переправленных свитков",
+        "documentation" : { },
+        "group" : "Цитадель Минас Тирита",
+        "id" : "60",
+        "name" : "Тайник у Андуина",
+        "properties" : {
+          "structurizr.dsl.identifier" : "ent_advisors.anduin_cache"
+        },
+        "relationships" : [ {
+          "description" : "INF09. Свитки из Тайника",
+          "destinationId" : "59",
+          "id" : "85",
+          "sourceId" : "60",
+          "tags" : "Relationship,Dataflow"
+        } ],
+        "tags" : "Element,Container,DB,NotInProd",
+        "technology" : "PostgreSQL"
+      }, {
+        "description" : "Русло свитков",
+        "documentation" : { },
+        "group" : "Цитадель Минас Тирита",
+        "id" : "61",
+        "name" : "Течение Андуина",
+        "properties" : {
+          "structurizr.dsl.identifier" : "ent_advisors.anduin_stream"
+        },
+        "relationships" : [ {
+          "description" : "INF08. Свитки из Русла",
+          "destinationId" : "59",
+          "id" : "84",
+          "sourceId" : "61",
+          "tags" : "Relationship,Dataflow"
+        } ],
+        "tags" : "Element,Container,Pipe,NotInProd",
+        "technology" : "Kafka"
+      } ],
+      "description" : "Мудрые создания, отвечающие на вопросы",
+      "documentation" : { },
+      "group" : "Совет Мудрых",
+      "id" : "25",
+      "name" : "Энты-Советники",
+      "properties" : {
+        "structurizr.dsl.identifier" : "ent_advisors"
+      },
+      "relationships" : [ {
+        "description" : "Заглядывает в Зеркало",
+        "destinationId" : "28",
+        "id" : "44",
+        "sourceId" : "25",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      }, {
+        "description" : "Обращается к Оку",
+        "destinationId" : "7",
+        "id" : "45",
+        "sourceId" : "25",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      }, {
+        "description" : "Запрашивает хроники",
+        "destinationId" : "29",
+        "id" : "46",
+        "sourceId" : "25",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      }, {
+        "description" : "Берёт Эльфийский Клинок",
+        "destinationId" : "12",
+        "id" : "54",
+        "sourceId" : "25",
+        "tags" : "Relationship",
+        "technology" : "HTTPS"
+      }, {
+        "description" : "INF01. Ответы на мольбы путников",
+        "destinationId" : "22",
+        "id" : "73",
+        "linkedRelationshipId" : "72",
+        "sourceId" : "25"
+      }, {
+        "description" : "INF02. Ответы на вопросы Гэндальфа",
+        "destinationId" : "33",
+        "id" : "75",
+        "linkedRelationshipId" : "74",
+        "sourceId" : "25"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Исцеление и поддержка",
+      "documentation" : { },
+      "group" : "Совет Мудрых",
+      "id" : "26",
+      "name" : "Целитель Элронд",
+      "properties" : {
+        "structurizr.dsl.identifier" : "elrond_healer"
+      },
+      "relationships" : [ {
+        "description" : "Обращается к Оку",
+        "destinationId" : "7",
+        "id" : "50",
+        "sourceId" : "26",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Летопись и толкование речей совета",
+      "documentation" : { },
+      "group" : "Совет Мудрых",
+      "id" : "27",
+      "name" : "Летописец Бильбо",
+      "properties" : {
+        "structurizr.dsl.identifier" : "bilbo_chronicler"
+      },
+      "relationships" : [ {
+        "description" : "Обращается к Оку",
+        "destinationId" : "7",
+        "id" : "52",
+        "sourceId" : "27",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      }, {
+        "description" : "Передаёт свитки",
+        "destinationId" : "32",
+        "id" : "53",
+        "sourceId" : "27",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Кладезь мудрости Средиземья",
+      "documentation" : { },
+      "id" : "28",
+      "name" : "Зеркало Галадриэль",
+      "properties" : {
+        "structurizr.dsl.identifier" : "mirror_of_galadriel"
+      },
+      "relationships" : [ {
+        "description" : "Загружает свитки из Библиотеки",
+        "destinationId" : "3",
+        "id" : "55",
+        "sourceId" : "28",
+        "tags" : "Relationship",
+        "technology" : "HTTPS"
+      }, {
+        "description" : "Загружает свитки из Архивов",
+        "destinationId" : "4",
+        "id" : "56",
+        "sourceId" : "28",
+        "tags" : "Relationship",
+        "technology" : "HTTPS"
+      }, {
+        "description" : "INF03. Знания Средиземья",
+        "destinationId" : "57",
+        "id" : "76",
+        "sourceId" : "28",
+        "tags" : "Relationship,Dataflow"
+      }, {
+        "description" : "INF03. Знания Средиземья",
+        "destinationId" : "25",
+        "id" : "77",
+        "linkedRelationshipId" : "76",
+        "sourceId" : "28"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Хроники деяний хоббитов",
+      "documentation" : { },
+      "id" : "29",
+      "name" : "Летопись Шира",
+      "properties" : {
+        "structurizr.dsl.identifier" : "shire_chronicles"
+      },
+      "relationships" : [ {
+        "description" : "INF06. Хроники деяний хоббитов",
+        "destinationId" : "58",
+        "id" : "81",
+        "sourceId" : "29",
+        "tags" : "Relationship,Dataflow"
+      }, {
+        "description" : "INF06. Хроники деяний хоббитов",
+        "destinationId" : "25",
+        "id" : "82",
+        "linkedRelationshipId" : "81",
+        "sourceId" : "29"
+      } ],
+      "tags" : "Element,Software System,External"
+    }, {
+      "description" : "Воздушная доставка свитков",
+      "documentation" : { },
+      "id" : "30",
+      "name" : "Орлы Манвэ",
+      "properties" : {
+        "structurizr.dsl.identifier" : "eagles_of_manwe"
+      },
+      "relationships" : [ {
+        "description" : "Доставляет свитки Энтам",
+        "destinationId" : "25",
+        "id" : "48",
+        "sourceId" : "30",
+        "tags" : "Relationship",
+        "technology" : "kafka"
+      }, {
+        "description" : "Орлы сбрасывают свитки в Течение",
+        "destinationId" : "61",
+        "id" : "69",
+        "sourceId" : "30",
+        "tags" : "Relationship",
+        "technology" : "TCP"
+      }, {
+        "description" : "INF07. Свитки из Кузниц Нолдор",
+        "destinationId" : "61",
+        "id" : "83",
+        "sourceId" : "30",
+        "tags" : "Relationship,Dataflow"
+      } ],
+      "tags" : "Element,Software System,External"
+    }, {
+      "documentation" : { },
+      "id" : "31",
+      "name" : "Кузницы Нолдор",
+      "properties" : {
+        "structurizr.dsl.identifier" : "noldor_forges"
+      },
+      "relationships" : [ {
+        "description" : "Отправляет свитки с Орлами",
+        "destinationId" : "30",
+        "id" : "47",
+        "sourceId" : "31",
+        "tags" : "Relationship",
+        "technology" : "kafka"
+      } ],
+      "tags" : "Element,Software System,External"
+    }, {
+      "documentation" : { },
+      "id" : "32",
+      "name" : "Перо-Самописец",
+      "properties" : {
+        "structurizr.dsl.identifier" : "chronicle_bot"
+      },
+      "tags" : "Element,Software System,External"
+    }, {
+      "documentation" : { },
+      "id" : "33",
+      "name" : "Гэндальф-Координатор",
+      "properties" : {
+        "structurizr.dsl.identifier" : "gandalf"
+      },
+      "relationships" : [ {
+        "description" : "Разбирает задачи из Палантира",
+        "destinationId" : "5",
+        "id" : "37",
+        "sourceId" : "33",
+        "tags" : "Relationship",
+        "technology" : "HTTPS"
+      }, {
+        "description" : "Передаёт вопросы Энтам",
+        "destinationId" : "25",
+        "id" : "38",
+        "sourceId" : "33",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      }, {
+        "description" : "Передаёт вопросы от Гэндальфа",
+        "destinationId" : "57",
+        "id" : "63",
+        "sourceId" : "33",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      } ],
+      "tags" : "Element,Software System,External"
+    }, {
+      "description" : "Главный зал общения с магами",
+      "documentation" : { },
+      "id" : "87",
+      "name" : "Белая Башня",
+      "properties" : {
+        "structurizr.dsl.identifier" : "white_tower"
+      },
+      "relationships" : [ {
+        "description" : "Передаёт мольбы Радагасту",
+        "destinationId" : "89",
+        "id" : "97",
+        "sourceId" : "87",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      }, {
+        "description" : "Запрашивает свитки через Перекрёсток",
+        "destinationId" : "93",
+        "id" : "98",
+        "sourceId" : "87",
+        "tags" : "Relationship",
+        "technology" : "MCP/HTTPS"
+      }, {
+        "description" : "Запрашивает свитки",
+        "destinationId" : "109",
+        "id" : "110",
+        "sourceId" : "87",
+        "tags" : "Relationship",
+        "technology" : "MCP/HTTPS"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Потоки поручений от Валар",
+      "documentation" : { },
+      "id" : "88",
+      "name" : "Ветра Манвэ",
+      "properties" : {
+        "structurizr.dsl.identifier" : "winds_of_manwe"
+      },
+      "relationships" : [ {
+        "description" : "Призывает Стражей",
+        "destinationId" : "91",
+        "id" : "99",
+        "sourceId" : "88",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      } ],
+      "tags" : "Element,Software System,External"
+    }, {
+      "description" : "Мольбы в Копи и Сокровищницу на языке смертных",
+      "documentation" : { },
+      "group" : "Братство Кольца",
+      "id" : "89",
+      "name" : "Радагаст-Аналитик",
+      "properties" : {
+        "structurizr.dsl.identifier" : "radagast"
+      },
+      "relationships" : [ {
+        "description" : "Обращается к Оку за заклинаниями",
+        "destinationId" : "7",
+        "id" : "100",
+        "sourceId" : "89",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      }, {
+        "description" : "Спускается в Копи",
+        "destinationId" : "9",
+        "id" : "101",
+        "sourceId" : "89",
+        "tags" : "Relationship",
+        "technology" : "TCP"
+      }, {
+        "description" : "Входит в Сокровищницу",
+        "destinationId" : "10",
+        "id" : "102",
+        "sourceId" : "89",
+        "tags" : "Relationship",
+        "technology" : "TCP"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "documentation" : { },
+      "group" : "Братство Кольца",
+      "id" : "90",
+      "name" : "Барды Рохана",
+      "properties" : {
+        "structurizr.dsl.identifier" : "bards_of_rohan"
+      },
+      "relationships" : [ {
+        "description" : "Вывешивает вести на Доску",
+        "destinationId" : "95",
+        "id" : "103",
+        "sourceId" : "90",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      }, {
+        "description" : "Просит Око пересказать кратко и по делу",
+        "destinationId" : "7",
+        "id" : "104",
+        "sourceId" : "90",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      }, {
+        "description" : "Собирает вести",
+        "destinationId" : "94",
+        "id" : "105",
+        "sourceId" : "90",
+        "tags" : "Relationship",
+        "technology" : "HTTPS"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "documentation" : { },
+      "group" : "Братство Кольца",
+      "id" : "91",
+      "name" : "Стражи Цитадели",
+      "properties" : {
+        "structurizr.dsl.identifier" : "citadel_guards"
+      },
+      "relationships" : [ {
+        "description" : "Обращается к Оку",
+        "destinationId" : "7",
+        "id" : "106",
+        "sourceId" : "91",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "documentation" : { },
+      "group" : "Братство Кольца",
+      "id" : "92",
+      "name" : "Кузнецы Ривенделла",
+      "properties" : {
+        "structurizr.dsl.identifier" : "smiths_of_rivendell"
+      },
+      "relationships" : [ {
+        "description" : "Обращается к Оку",
+        "destinationId" : "7",
+        "id" : "107",
+        "sourceId" : "92",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "containers" : [ {
+        "description" : "Связь с Библиотекой Минас Тирита",
+        "documentation" : { },
+        "group" : "Цитадель Минас Тирита",
+        "id" : "109",
+        "name" : "Палантир Знаний",
+        "properties" : {
+          "structurizr.dsl.identifier" : "bree_crossroads.knowledge_palantir"
+        },
+        "relationships" : [ {
+          "description" : "Читает из Библиотеки",
+          "destinationId" : "3",
+          "id" : "111",
+          "sourceId" : "109",
+          "tags" : "Relationship",
+          "technology" : "REST/HTTPS"
+        }, {
+          "description" : "INF01. Свитки из Библиотеки",
+          "destinationId" : "87",
+          "id" : "112",
+          "sourceId" : "109",
+          "tags" : "Relationship,Dataflow"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "Java"
+      } ],
+      "description" : "Узловая станция Средиземья",
+      "documentation" : { },
+      "group" : "Палантиры",
+      "id" : "93",
+      "name" : "Перекрёсток Бри",
+      "properties" : {
+        "structurizr.dsl.identifier" : "bree_crossroads"
+      },
+      "relationships" : [ {
+        "description" : "Читает свитки из Библиотеки",
+        "destinationId" : "3",
+        "id" : "108",
+        "sourceId" : "93",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      }, {
+        "description" : "INF01. Свитки из Библиотеки",
+        "destinationId" : "87",
+        "id" : "113",
+        "linkedRelationshipId" : "112",
+        "sourceId" : "93"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "documentation" : { },
+      "id" : "94",
+      "name" : "Вести из Дальних Земель",
+      "properties" : {
+        "structurizr.dsl.identifier" : "distant_lands_news"
+      },
+      "tags" : "Element,Software System,External"
+    }, {
+      "documentation" : { },
+      "id" : "95",
+      "name" : "Доска Объявлений Бри",
+      "properties" : {
+        "structurizr.dsl.identifier" : "bree_notice_board"
+      },
+      "tags" : "Element,Software System,External"
+    }, {
+      "documentation" : { },
+      "id" : "116",
+      "name" : "Хельмова Падь",
+      "properties" : {
+        "structurizr.dsl.identifier" : "helms_deep"
+      },
+      "relationships" : [ {
+        "description" : "Запрашивает разведданные",
+        "destinationId" : "117",
+        "id" : "119",
+        "sourceId" : "116",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      }, {
+        "description" : "Запрашивает разведданные",
+        "destinationId" : "122",
+        "id" : "133",
+        "sourceId" : "116",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      } ],
+      "tags" : "Element,Software System,External"
+    }, {
+      "containers" : [ {
+        "description" : "Координатор",
+        "documentation" : { },
+        "group" : "Цитадель Минас Тирита",
+        "id" : "122",
+        "name" : "Арагорн",
+        "properties" : {
+          "structurizr.dsl.identifier" : "aragorn_palantir.aragorn"
+        },
+        "relationships" : [ {
+          "description" : "Забирает расшифровки из потока",
+          "destinationId" : "118",
+          "id" : "126",
+          "sourceId" : "122",
+          "tags" : "Relationship",
+          "technology" : "Kafka"
+        }, {
+          "description" : "Сохраняет в Хранилище",
+          "destinationId" : "123",
+          "id" : "127",
+          "sourceId" : "122",
+          "tags" : "Relationship",
+          "technology" : "TCP"
+        }, {
+          "description" : "Отправляет Воронов с заданиями",
+          "destinationId" : "124",
+          "id" : "128",
+          "sourceId" : "122",
+          "tags" : "Relationship",
+          "technology" : "AMQP"
+        }, {
+          "description" : "INF03. Задания на обработку",
+          "destinationId" : "124",
+          "id" : "137",
+          "sourceId" : "122",
+          "tags" : "Relationship,Dataflow"
+        }, {
+          "description" : "INF08. Толкования речей",
+          "destinationId" : "116",
+          "id" : "143",
+          "sourceId" : "122",
+          "tags" : "Relationship,Dataflow"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "Java"
+      }, {
+        "description" : "БД",
+        "documentation" : { },
+        "group" : "Цитадель Минас Тирита",
+        "id" : "123",
+        "name" : "Хранилище Мории",
+        "properties" : {
+          "structurizr.dsl.identifier" : "aragorn_palantir.moria_vault"
+        },
+        "relationships" : [ {
+          "description" : "INF02. Расшифровки и толкования Ока",
+          "destinationId" : "122",
+          "id" : "136",
+          "sourceId" : "123",
+          "tags" : "Relationship,Dataflow"
+        } ],
+        "tags" : "Element,Container,DB",
+        "technology" : "PostgreSQL"
+      }, {
+        "description" : "Очередь посланий",
+        "documentation" : { },
+        "group" : "Цитадель Минас Тирита",
+        "id" : "124",
+        "name" : "Почтовые Вороны",
+        "properties" : {
+          "structurizr.dsl.identifier" : "aragorn_palantir.ravens"
+        },
+        "relationships" : [ {
+          "description" : "Передаёт задания Гному",
+          "destinationId" : "125",
+          "id" : "129",
+          "sourceId" : "124",
+          "tags" : "Relationship",
+          "technology" : "AMQP"
+        }, {
+          "description" : "Возвращает результаты Арагорну",
+          "destinationId" : "122",
+          "id" : "130",
+          "sourceId" : "124",
+          "tags" : "Relationship",
+          "technology" : "AMQP"
+        }, {
+          "description" : "INF04. Задания на обработку",
+          "destinationId" : "125",
+          "id" : "138",
+          "sourceId" : "124",
+          "tags" : "Relationship,Dataflow"
+        }, {
+          "description" : "INF07. Толкования Ока",
+          "destinationId" : "122",
+          "id" : "142",
+          "sourceId" : "124",
+          "tags" : "Relationship,Dataflow"
+        } ],
+        "tags" : "Element,Container,Pipe",
+        "technology" : "RabbitMQ"
+      }, {
+        "description" : "Рабочий",
+        "documentation" : { },
+        "group" : "Цитадель Минас Тирита",
+        "id" : "125",
+        "name" : "Гном-Рудокоп",
+        "properties" : {
+          "structurizr.dsl.identifier" : "aragorn_palantir.dwarf_miner"
+        },
+        "relationships" : [ {
+          "description" : "Обращается к Оку",
+          "destinationId" : "7",
+          "id" : "131",
+          "sourceId" : "125",
+          "tags" : "Relationship",
+          "technology" : "REST/HTTPS"
+        }, {
+          "description" : "Отдаёт результаты Воронам",
+          "destinationId" : "124",
+          "id" : "132",
+          "sourceId" : "125",
+          "tags" : "Relationship",
+          "technology" : "AMQP"
+        }, {
+          "description" : "INF06. Толкования Ока",
+          "destinationId" : "124",
+          "id" : "141",
+          "sourceId" : "125",
+          "tags" : "Relationship,Dataflow"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "Python"
+      } ],
+      "description" : "Всевидящее толкование речей",
+      "documentation" : { },
+      "group" : "Слухачи",
+      "id" : "117",
+      "name" : "Палантир Арагорна",
+      "properties" : {
+        "structurizr.dsl.identifier" : "aragorn_palantir"
+      },
+      "relationships" : [ {
+        "description" : "Забирает расшифровки из потока",
+        "destinationId" : "118",
+        "id" : "120",
+        "sourceId" : "117",
+        "tags" : "Relationship",
+        "technology" : "Kafka"
+      }, {
+        "description" : "Просит Око истолковать",
+        "destinationId" : "7",
+        "id" : "121",
+        "sourceId" : "117",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      }, {
+        "description" : "INF08. Толкования речей",
+        "destinationId" : "116",
+        "id" : "144",
+        "linkedRelationshipId" : "143",
+        "sourceId" : "117"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Ловцы речей Средиземья",
+      "documentation" : { },
+      "group" : "Слухачи",
+      "id" : "118",
+      "name" : "Слухачи Изенгарда",
+      "properties" : {
+        "structurizr.dsl.identifier" : "isengard_listeners"
+      },
+      "relationships" : [ {
+        "description" : "INF01. Расшифровки речей",
+        "destinationId" : "122",
+        "id" : "134",
+        "sourceId" : "118",
+        "tags" : "Relationship,Dataflow"
+      }, {
+        "description" : "INF01. Расшифровки речей",
+        "destinationId" : "117",
+        "id" : "135",
+        "linkedRelationshipId" : "134",
+        "sourceId" : "118"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "description" : "Расшифровка древних свитков",
+      "documentation" : { },
+      "group" : "Рунические Мастерские",
+      "id" : "145",
+      "name" : "Руны Гномов",
+      "properties" : {
+        "structurizr.dsl.identifier" : "dwarven_runes"
+      },
+      "relationships" : [ {
+        "description" : "Просит Око расшифровать руны",
+        "destinationId" : "7",
+        "id" : "146",
+        "sourceId" : "145",
+        "tags" : "Relationship",
+        "technology" : "REST/HTTPS"
+      } ],
+      "tags" : "Element,Software System"
+    } ]
+  },
+  "name" : "Средиземье",
+  "properties" : {
+    "structurizr.inspection.error" : "56",
+    "structurizr.inspection.info" : "0",
+    "structurizr.inspection.ignore" : "0",
+    "structurizr.inspection.warning" : "0"
+  },
+  "views" : {
+    "configuration" : {
+      "branding" : { },
+      "lastSavedView" : "bree_crossroads_containers",
+      "styles" : {
+        "elements" : [ {
+          "border" : "Solid",
+          "stroke" : "#1168bd",
+          "strokeWidth" : 5,
+          "tag" : "Changed"
+        }, {
+          "background" : "#438dd5",
+          "color" : "#ffffff",
+          "shape" : "RoundedBox",
+          "tag" : "Container"
+        }, {
+          "shape" : "Cylinder",
+          "tag" : "DB"
+        }, {
+          "background" : "#666666",
+          "color" : "#ffffff",
+          "tag" : "External"
+        }, {
+          "border" : "Solid",
+          "stroke" : "#2ea44f",
+          "strokeWidth" : 5,
+          "tag" : "New"
+        }, {
+          "border" : "Dashed",
+          "opacity" : 60,
+          "stroke" : "#666666",
+          "strokeWidth" : 4,
+          "tag" : "NotInProd"
+        }, {
+          "background" : "#08427b",
+          "color" : "#ffffff",
+          "shape" : "Person",
+          "tag" : "Person"
+        }, {
+          "shape" : "Pipe",
+          "tag" : "Pipe"
+        }, {
+          "background" : "#1168bd",
+          "color" : "#ffffff",
+          "shape" : "RoundedBox",
+          "tag" : "Software System"
+        } ],
+        "relationships" : [ {
+          "color" : "#1168bd",
+          "tag" : "Changed",
+          "thickness" : 3
+        }, {
+          "dashed" : true,
+          "tag" : "Dataflow",
+          "thickness" : 2
+        }, {
+          "color" : "#2ea44f",
+          "tag" : "New",
+          "thickness" : 3
+        } ]
+      },
+      "terminology" : { }
+    },
+    "containerViews" : [ {
+      "description" : "Энты-Советники: архитектура",
+      "dimensions" : {
+        "height" : 2590,
+        "width" : 4105
+      },
+      "elements" : [ {
+        "id" : "7",
+        "x" : 3310,
+        "y" : 1519
+      }, {
+        "id" : "22",
+        "x" : 180,
+        "y" : 1519
+      }, {
+        "id" : "28",
+        "x" : 3310,
+        "y" : 2040
+      }, {
+        "id" : "29",
+        "x" : 3310,
+        "y" : 55
+      }, {
+        "id" : "30",
+        "x" : 3310,
+        "y" : 560
+      }, {
+        "id" : "33",
+        "x" : 180,
+        "y" : 895
+      }, {
+        "id" : "57",
+        "x" : 955,
+        "y" : 1519
+      }, {
+        "id" : "58",
+        "x" : 955,
+        "y" : 55
+      }, {
+        "id" : "59",
+        "x" : 1645,
+        "y" : 555
+      }, {
+        "id" : "60",
+        "x" : 1640,
+        "y" : 1075
+      }, {
+        "id" : "61",
+        "x" : 2420,
+        "y" : 555
+      } ],
+      "externalSoftwareSystemBoundariesVisible" : false,
+      "key" : "ent_advisors_containers",
+      "name" : "Container View: Энты-Советники",
+      "order" : 3,
+      "relationships" : [ {
+        "id" : "62"
+      }, {
+        "id" : "63"
+      }, {
+        "id" : "64"
+      }, {
+        "id" : "65"
+      }, {
+        "id" : "66"
+      }, {
+        "id" : "67"
+      }, {
+        "id" : "68"
+      }, {
+        "id" : "69"
+      }, {
+        "id" : "70"
+      }, {
+        "id" : "71"
+      } ],
+      "softwareSystemId" : "25"
+    }, {
+      "description" : "Энты-Советники: инфопотоки",
+      "dimensions" : {
+        "height" : 2828,
+        "width" : 4199
+      },
+      "elements" : [ {
+        "id" : "7",
+        "x" : 3450,
+        "y" : 1725
+      }, {
+        "id" : "22",
+        "x" : 199,
+        "y" : 1727
+      }, {
+        "id" : "28",
+        "x" : 3450,
+        "y" : 2263
+      }, {
+        "id" : "29",
+        "x" : 3450,
+        "y" : 165
+      }, {
+        "id" : "30",
+        "x" : 3450,
+        "y" : 675
+      }, {
+        "id" : "33",
+        "x" : 199,
+        "y" : 1157
+      }, {
+        "id" : "57",
+        "x" : 1019,
+        "y" : 1727
+      }, {
+        "id" : "58",
+        "x" : 1019,
+        "y" : 167
+      }, {
+        "id" : "59",
+        "x" : 1794,
+        "y" : 677
+      }, {
+        "id" : "60",
+        "x" : 1794,
+        "y" : 1235
+      }, {
+        "id" : "61",
+        "x" : 2584,
+        "y" : 677
+      } ],
+      "externalSoftwareSystemBoundariesVisible" : false,
+      "key" : "ent_advisors_dataflow",
+      "name" : "Container View: Энты-Советники",
+      "order" : 4,
+      "relationships" : [ {
+        "id" : "72"
+      }, {
+        "id" : "74"
+      }, {
+        "id" : "76"
+      }, {
+        "id" : "78"
+      }, {
+        "id" : "80"
+      }, {
+        "id" : "81"
+      }, {
+        "id" : "83"
+      }, {
+        "id" : "84"
+      }, {
+        "id" : "85"
+      }, {
+        "id" : "86"
+      } ],
+      "softwareSystemId" : "25"
+    }, {
+      "automaticLayout" : {
+        "applied" : false,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "description" : "Перекрёсток Бри: архитектура",
+      "elements" : [ {
+        "id" : "3",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "87",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "109",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "externalSoftwareSystemBoundariesVisible" : false,
+      "key" : "bree_crossroads_containers",
+      "name" : "Container View: Перекрёсток Бри",
+      "order" : 6,
+      "relationships" : [ {
+        "id" : "110"
+      }, {
+        "id" : "111"
+      } ],
+      "softwareSystemId" : "93"
+    }, {
+      "automaticLayout" : {
+        "applied" : false,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "description" : "Перекрёсток Бри: инфопотоки",
+      "elements" : [ {
+        "id" : "3",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "87",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "109",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "externalSoftwareSystemBoundariesVisible" : false,
+      "key" : "bree_crossroads_dataflow",
+      "name" : "Container View: Перекрёсток Бри",
+      "order" : 7,
+      "relationships" : [ {
+        "id" : "112"
+      }, {
+        "id" : "114"
+      } ],
+      "softwareSystemId" : "93"
+    }, {
+      "description" : "Палантир Арагорна: архитектура",
+      "dimensions" : {
+        "height" : 2095,
+        "width" : 4048
+      },
+      "elements" : [ {
+        "id" : "7",
+        "x" : 3398,
+        "y" : 747
+      }, {
+        "id" : "116",
+        "x" : 1120,
+        "y" : 142
+      }, {
+        "id" : "118",
+        "x" : 200,
+        "y" : 747
+      }, {
+        "id" : "122",
+        "x" : 1120,
+        "y" : 747
+      }, {
+        "id" : "123",
+        "x" : 1120,
+        "y" : 1355
+      }, {
+        "id" : "124",
+        "x" : 1898,
+        "y" : 747
+      }, {
+        "id" : "125",
+        "x" : 2648,
+        "y" : 747
+      } ],
+      "externalSoftwareSystemBoundariesVisible" : false,
+      "key" : "aragorn_palantir_containers",
+      "name" : "Container View: Палантир Арагорна",
+      "order" : 9,
+      "relationships" : [ {
+        "id" : "126"
+      }, {
+        "id" : "127"
+      }, {
+        "id" : "128",
+        "vertices" : [ {
+          "x" : 1720,
+          "y" : 785
+        } ]
+      }, {
+        "id" : "129",
+        "vertices" : [ {
+          "x" : 2425,
+          "y" : 1000
+        } ]
+      }, {
+        "id" : "130",
+        "vertices" : [ {
+          "x" : 1735,
+          "y" : 995
+        } ]
+      }, {
+        "id" : "131"
+      }, {
+        "id" : "132",
+        "vertices" : [ {
+          "x" : 2500,
+          "y" : 790
+        } ]
+      }, {
+        "id" : "133"
+      } ],
+      "softwareSystemId" : "117"
+    }, {
+      "description" : "Палантир Арагорна: инфопотоки",
+      "dimensions" : {
+        "height" : 2085,
+        "width" : 4035
+      },
+      "elements" : [ {
+        "id" : "7",
+        "x" : 3384,
+        "y" : 745
+      }, {
+        "id" : "116",
+        "x" : 1110,
+        "y" : 143
+      }, {
+        "id" : "118",
+        "x" : 199,
+        "y" : 745
+      }, {
+        "id" : "122",
+        "x" : 1110,
+        "y" : 745
+      }, {
+        "id" : "123",
+        "x" : 1110,
+        "y" : 1346
+      }, {
+        "id" : "124",
+        "x" : 1819,
+        "y" : 745
+      }, {
+        "id" : "125",
+        "x" : 2564,
+        "y" : 745
+      } ],
+      "externalSoftwareSystemBoundariesVisible" : false,
+      "key" : "aragorn_palantir_dataflow",
+      "name" : "Container View: Палантир Арагорна",
+      "order" : 10,
+      "relationships" : [ {
+        "id" : "134"
+      }, {
+        "id" : "136"
+      }, {
+        "id" : "137",
+        "vertices" : [ {
+          "x" : 1689,
+          "y" : 1045
+        } ]
+      }, {
+        "id" : "138",
+        "vertices" : [ {
+          "x" : 2416,
+          "y" : 1045
+        } ]
+      }, {
+        "id" : "139"
+      }, {
+        "id" : "141",
+        "vertices" : [ {
+          "x" : 2416,
+          "y" : 745
+        } ]
+      }, {
+        "id" : "142",
+        "vertices" : [ {
+          "x" : 1689,
+          "y" : 745
+        } ]
+      }, {
+        "id" : "143"
+      } ],
+      "softwareSystemId" : "117"
+    } ],
+    "systemContextViews" : [ {
+      "description" : "Энты-Советники: обзор",
+      "dimensions" : {
+        "height" : 2020,
+        "width" : 3254
+      },
+      "elements" : [ {
+        "id" : "7",
+        "x" : 2579,
+        "y" : 1408
+      }, {
+        "id" : "12",
+        "x" : 329,
+        "y" : 1408
+      }, {
+        "id" : "22",
+        "x" : 704,
+        "y" : 208
+      }, {
+        "id" : "25",
+        "x" : 1455,
+        "y" : 810
+      }, {
+        "id" : "28",
+        "x" : 1079,
+        "y" : 1408
+      }, {
+        "id" : "29",
+        "x" : 1829,
+        "y" : 1408
+      }, {
+        "id" : "30",
+        "x" : 1454,
+        "y" : 208
+      }, {
+        "id" : "33",
+        "x" : 2204,
+        "y" : 208
+      } ],
+      "enterpriseBoundaryVisible" : true,
+      "key" : "ent_advisors_system",
+      "name" : "System Context View: Энты-Советники",
+      "order" : 2,
+      "paperSize" : "A4_Landscape",
+      "relationships" : [ {
+        "id" : "38"
+      }, {
+        "id" : "43"
+      }, {
+        "id" : "44"
+      }, {
+        "id" : "45",
+        "vertices" : [ {
+          "x" : 2429,
+          "y" : 1304
+        } ]
+      }, {
+        "id" : "46"
+      }, {
+        "id" : "48"
+      }, {
+        "id" : "54",
+        "vertices" : [ {
+          "x" : 929,
+          "y" : 1304
+        } ]
+      } ],
+      "softwareSystemId" : "25"
+    }, {
+      "automaticLayout" : {
+        "applied" : false,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "description" : "Перекрёсток Бри: обзор",
+      "elements" : [ {
+        "id" : "3",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "87",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "93",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "enterpriseBoundaryVisible" : true,
+      "key" : "bree_crossroads_system",
+      "name" : "System Context View: Перекрёсток Бри",
+      "order" : 5,
+      "relationships" : [ {
+        "id" : "108"
+      }, {
+        "id" : "98"
+      } ],
+      "softwareSystemId" : "93"
+    }, {
+      "description" : "Палантир Арагорна: обзор",
+      "dimensions" : {
+        "height" : 2020,
+        "width" : 1754
+      },
+      "elements" : [ {
+        "id" : "7",
+        "x" : 1079,
+        "y" : 1408
+      }, {
+        "id" : "116",
+        "x" : 329,
+        "y" : 208
+      }, {
+        "id" : "117",
+        "x" : 329,
+        "y" : 808
+      }, {
+        "id" : "118",
+        "x" : 329,
+        "y" : 1408
+      } ],
+      "enterpriseBoundaryVisible" : true,
+      "key" : "aragorn_palantir_system",
+      "name" : "System Context View: Палантир Арагорна",
+      "order" : 8,
+      "paperSize" : "A4_Portrait",
+      "relationships" : [ {
+        "id" : "119"
+      }, {
+        "id" : "120"
+      }, {
+        "id" : "121"
+      } ],
+      "softwareSystemId" : "117"
+    } ],
+    "systemLandscapeViews" : [ {
+      "description" : "Карта Средиземья",
+      "dimensions" : {
+        "height" : 4520,
+        "width" : 8925
+      },
+      "elements" : [ {
+        "id" : "1",
+        "x" : 6450,
+        "y" : 208
+      }, {
+        "id" : "2",
+        "x" : 3967,
+        "y" : 208
+      }, {
+        "id" : "3",
+        "x" : 7446,
+        "y" : 3308
+      }, {
+        "id" : "4",
+        "x" : 5946,
+        "y" : 3308
+      }, {
+        "id" : "5",
+        "x" : 4692,
+        "y" : 908
+      }, {
+        "id" : "6",
+        "x" : 3942,
+        "y" : 908
+      }, {
+        "id" : "7",
+        "x" : 3804,
+        "y" : 2708
+      }, {
+        "id" : "8",
+        "x" : 2946,
+        "y" : 3308
+      }, {
+        "id" : "9",
+        "x" : 2675,
+        "y" : 3908
+      }, {
+        "id" : "10",
+        "x" : 1925,
+        "y" : 3908
+      }, {
+        "id" : "11",
+        "x" : 4446,
+        "y" : 3308
+      }, {
+        "id" : "12",
+        "x" : 5196,
+        "y" : 3308
+      }, {
+        "id" : "13",
+        "x" : 3696,
+        "y" : 3308
+      }, {
+        "id" : "14",
+        "x" : 3696,
+        "y" : 3908
+      }, {
+        "id" : "20",
+        "x" : 6050,
+        "y" : 908
+      }, {
+        "id" : "21",
+        "x" : 6800,
+        "y" : 908
+      }, {
+        "id" : "22",
+        "x" : 6050,
+        "y" : 1508
+      }, {
+        "id" : "23",
+        "x" : 3942,
+        "y" : 1508
+      }, {
+        "id" : "24",
+        "x" : 6800,
+        "y" : 1508
+      }, {
+        "id" : "25",
+        "x" : 5442,
+        "y" : 2108
+      }, {
+        "id" : "26",
+        "x" : 4692,
+        "y" : 2108
+      }, {
+        "id" : "27",
+        "x" : 6192,
+        "y" : 2108
+      }, {
+        "id" : "28",
+        "x" : 5912,
+        "y" : 2708
+      }, {
+        "id" : "29",
+        "x" : 4554,
+        "y" : 2708
+      }, {
+        "id" : "30",
+        "x" : 4692,
+        "y" : 1508
+      }, {
+        "id" : "31",
+        "x" : 3192,
+        "y" : 908
+      }, {
+        "id" : "32",
+        "x" : 6662,
+        "y" : 2708
+      }, {
+        "id" : "33",
+        "x" : 5008,
+        "y" : 258
+      }, {
+        "id" : "87",
+        "x" : 2442,
+        "y" : 1508
+      }, {
+        "id" : "88",
+        "x" : 3192,
+        "y" : 1508
+      }, {
+        "id" : "89",
+        "x" : 1692,
+        "y" : 2108
+      }, {
+        "id" : "90",
+        "x" : 942,
+        "y" : 2108
+      }, {
+        "id" : "91",
+        "x" : 3192,
+        "y" : 2108
+      }, {
+        "id" : "92",
+        "x" : 2442,
+        "y" : 2108
+      }, {
+        "id" : "93",
+        "x" : 8162,
+        "y" : 2708
+      }, {
+        "id" : "94",
+        "x" : 208,
+        "y" : 2708
+      }, {
+        "id" : "95",
+        "x" : 958,
+        "y" : 2708
+      }, {
+        "id" : "116",
+        "x" : 7550,
+        "y" : 1508
+      }, {
+        "id" : "117",
+        "x" : 7412,
+        "y" : 2108
+      }, {
+        "id" : "118",
+        "x" : 7412,
+        "y" : 2708
+      }, {
+        "id" : "145",
+        "x" : 3942,
+        "y" : 2108
+      } ],
+      "enterpriseBoundaryVisible" : true,
+      "key" : "Landscape",
+      "name" : "System Landscape View",
+      "order" : 1,
+      "paperSize" : "A1_Landscape",
+      "relationships" : [ {
+        "id" : "100",
+        "vertices" : [ {
+          "x" : 2292,
+          "y" : 2512
+        } ]
+      }, {
+        "id" : "101",
+        "vertices" : [ {
+          "x" : 2221,
+          "y" : 2604
+        } ]
+      }, {
+        "id" : "102"
+      }, {
+        "id" : "103"
+      }, {
+        "id" : "104",
+        "vertices" : [ {
+          "x" : 1542,
+          "y" : 2512
+        } ]
+      }, {
+        "id" : "105"
+      }, {
+        "id" : "106"
+      }, {
+        "id" : "107",
+        "vertices" : [ {
+          "x" : 3042,
+          "y" : 2512
+        } ]
+      }, {
+        "id" : "108"
+      }, {
+        "id" : "119"
+      }, {
+        "id" : "120"
+      }, {
+        "id" : "121",
+        "vertices" : [ {
+          "x" : 6821,
+          "y" : 2512
+        }, {
+          "x" : 4404,
+          "y" : 2604
+        } ]
+      }, {
+        "id" : "146"
+      }, {
+        "id" : "15"
+      }, {
+        "id" : "16",
+        "vertices" : [ {
+          "x" : 3517,
+          "y" : 3204
+        } ]
+      }, {
+        "id" : "17",
+        "vertices" : [ {
+          "x" : 3546,
+          "y" : 3712
+        } ]
+      }, {
+        "id" : "18",
+        "vertices" : [ {
+          "x" : 3546,
+          "y" : 3712
+        }, {
+          "x" : 2525,
+          "y" : 3804
+        } ]
+      }, {
+        "id" : "19"
+      }, {
+        "id" : "34"
+      }, {
+        "id" : "35",
+        "vertices" : [ {
+          "x" : 4542,
+          "y" : 1208
+        } ]
+      }, {
+        "id" : "36"
+      }, {
+        "id" : "37"
+      }, {
+        "id" : "38"
+      }, {
+        "id" : "39"
+      }, {
+        "id" : "40"
+      }, {
+        "id" : "41"
+      }, {
+        "id" : "42"
+      }, {
+        "id" : "43"
+      }, {
+        "id" : "44"
+      }, {
+        "id" : "45",
+        "vertices" : [ {
+          "x" : 5292,
+          "y" : 2512
+        }, {
+          "x" : 4404,
+          "y" : 2604
+        } ]
+      }, {
+        "id" : "46"
+      }, {
+        "id" : "47"
+      }, {
+        "id" : "48"
+      }, {
+        "id" : "49"
+      }, {
+        "id" : "50",
+        "vertices" : [ {
+          "x" : 4571,
+          "y" : 2512
+        }, {
+          "x" : 4404,
+          "y" : 2604
+        } ]
+      }, {
+        "id" : "51"
+      }, {
+        "id" : "52",
+        "vertices" : [ {
+          "x" : 6042,
+          "y" : 2512
+        }, {
+          "x" : 4404,
+          "y" : 2604
+        } ]
+      }, {
+        "id" : "53"
+      }, {
+        "id" : "54"
+      }, {
+        "id" : "55",
+        "vertices" : [ {
+          "x" : 6512,
+          "y" : 3112
+        } ]
+      }, {
+        "id" : "56"
+      }, {
+        "id" : "96",
+        "vertices" : [ {
+          "x" : 3042,
+          "y" : 908
+        } ]
+      }, {
+        "id" : "97"
+      }, {
+        "id" : "98",
+        "vertices" : [ {
+          "x" : 3042,
+          "y" : 1808
+        }, {
+          "x" : 8042,
+          "y" : 2004
+        } ]
+      }, {
+        "id" : "99"
+      } ]
+    } ]
+  }
+}

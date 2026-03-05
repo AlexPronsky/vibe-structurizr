@@ -1,0 +1,42 @@
+# Exported diagrams (PlantUML, PNG, SVG, etc.)
+structurizr/export/
+export/
+**/export/
+
+# Temp / generated Structurizr workspace files
+*.tmp
+*.bak
+
+# DSL Editor autosaves
+*.save
+*.autosave
+
+# Local Structurizr Lite state
+.structurizr
+**/.structurizr
+
+# Local backups
+backup-*.dsl
+*.dsl.bak
+
+# Structurizr CLI logs
+*.log
+
+# Docker CLI artifacts
+.env
+.docker/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+desktop.ini
+*~
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Dev container local state
+.devcontainer/.claude-state/
+.devcontainer/.vscode-server-state/

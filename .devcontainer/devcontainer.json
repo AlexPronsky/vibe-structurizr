@@ -1,0 +1,25 @@
+{
+  "name": "ai-arch",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "anthropic.claude-code"
+      ]
+    }
+  },
+  "forwardPorts": [8080],
+  "remoteEnv": {
+    "HOST_PROJECT_ROOT": "${localWorkspaceFolder}"
+  },
+  "mounts": [
+    "source=ai-arch-claude-state,target=/home/vscode/.claude,type=volume",
+    "source=ai-arch-vscode-server,target=/home/vscode/.vscode-server,type=volume"
+  ]
+}
