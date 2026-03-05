@@ -33,6 +33,10 @@ scripts/
   export-svg.sh              # Экспорт диаграмм в SVG (Puppeteer)
   export-diagrams.js         # JS-скрипт экспорта
 
+docs/
+  Стандарты ИБ/                 # Стандарты ИБ, которые учитываются при ревью
+  Стандарты корп. архитектуры/  # Корп. стандраты, которые учитываются при ревью
+
 .claude/
   skills/                    # Claude Code Skills
     arch-generate-solution/  #   Генерация архитектурного решения
