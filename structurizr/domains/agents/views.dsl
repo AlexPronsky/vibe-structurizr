@@ -7,12 +7,12 @@ systemContext bree_crossroads "bree_crossroads_system" "Перекрёсток �
 container bree_crossroads "bree_crossroads_containers" "Перекрёсток Бри: архитектура" {
     include *
     exclude relationship.tag==Dataflow
-    autoLayout
+    autoLayout lr
 }
 
 container bree_crossroads "bree_crossroads_dataflow" "Перекрёсток Бри: инфопотоки" {
     include *
     exclude relationship.tag!=Dataflow
-    autoLayout
+    autoLayout rl
 }
 

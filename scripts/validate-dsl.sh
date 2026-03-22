@@ -14,11 +14,18 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
-NETWORK="ai-arch_default"
-STRUCTURIZR_BASE="http://structurizr:8080"
+
+# Загружаем переменные из .env
+if [ -f "${PROJECT_DIR}/.env" ]; then
+  set -a; source "${PROJECT_DIR}/.env"; set +a
+fi
+
+NETWORK="${DOCKER_NETWORK:?Переменная DOCKER_NETWORK не задана. Проверьте .env файл}"
+CONTAINER="${STRUCTURIZR_CONTAINER_NAME:?Переменная STRUCTURIZR_CONTAINER_NAME не задана. Проверьте .env файл}"
+STRUCTURIZR_BASE="http://${CONTAINER}:8080"
 
 # --- Проверяем, запущен ли Structurizr ---
-if ! docker ps --format '{{.Names}}' | grep -q '^structurizr$'; then
+if ! docker ps --format '{{.Names}}' | grep -q "^${CONTAINER}$"; then
   echo "Structurizr не запущен. Запускаю docker compose up -d ..."
   docker compose -f "${PROJECT_DIR}/docker-compose.yml" up -d
   echo "Жду готовности Structurizr (до 30 сек)..."
