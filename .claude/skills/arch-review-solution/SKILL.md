@@ -1,280 +1,280 @@
 ---
 name: arch-review-solution
-description: Провести архитектурное ревью решения (АР) с точки зрения 5 ролей и сформировать отчёт с замечаниями
+description: Conduct an architecture review of a solution (SAD) from 5 role perspectives and generate a findings report
 allowed-tools: Read, Grep, Glob, Write, Edit, Bash, Agent, AskUserQuestion, TodoWrite
 user-invocable: true
 ---
 
-# Архитектурное ревью решения
+# Architecture Solution Review
 
-## Задача
+## Task
 
-Провести комплексное ревью архитектурного решения (АР) с точки зрения 5 ролей, каждая из которых имеет свой фокус внимания и набор компетенций. Сформировать структурированный отчёт с замечаниями и рекомендациями.
+Conduct a comprehensive review of an architecture solution (SAD) from the perspective of 5 roles, each with its own focus area and set of competencies. Generate a structured report with findings and recommendations.
 
-## Аргумент
+## Argument
 
-Путь к папке решения, например: `solutions/005_Формирование BPMN 2.0 и BRD`
+Path to the solution folder, e.g.: `solutions/005_BPMN 2.0 and BRD Generation`
 
-Если аргумент не указан — спроси пользователя.
+If no argument is provided — ask the user.
 
-## Алгоритм
+## Algorithm
 
-### Фаза 1. Сбор контекста
+### Phase 1. Context Gathering
 
-1. Прочитай **все файлы** из `<папка решения>/input/` — бизнес-требования (БТ), описания, схемы процессов.
-   > **Большие файлы:** БТ-документы со встроенным BPMN XML часто превышают лимит токенов. Читай такие файлы через `bash` (`cat file | head -N` + `cat file | tail -n +N`), а не через Read.
+1. Read **all files** from `<solution folder>/input/` — business requirements (BR), descriptions, process diagrams.
+   > **Large files:** BR documents with embedded BPMN XML often exceed the token limit. Read such files via `bash` (`cat file | head -N` + `cat file | tail -n +N`), not via Read.
 
-2. Прочитай **все файлы** из `<папка решения>/output/` — архитектурное решение (АР), SVG-диаграммы также нужно прочитать, SVG-диаграммы с шаблоном названия *-key.svg не читай.
+2. Read **all files** from `<solution folder>/output/` — solution architecture document (SAD), SVG diagrams should also be read, SVG diagrams with the *-key.svg name pattern should not be read.
 
-3. Прочитай текущую C4-архитектуру:
-   - `structurizr/common.dsl` — общие элементы
-   - Все файлы `structurizr/domains/*/*.dsl` — модели доменов
+3. Read the current C4 architecture:
+   - `structurizr/common.dsl` — common elements
+   - All files `structurizr/domains/*/*.dsl` — domain models
 
-4. Если в папке `docs/` есть стандарты — прочитай их. Они содержат нормативные требования, на которые нужно опираться при ревью. Стандарты могут покрывать:
-   - Архитектурные принципы и правила
-   - Требования информационной безопасности (Служба ИБ)
-   - Инфраструктурные стандарты
-   - DevOps-практики и требования
-   - Стандарты интеграции
+4. If the `docs/` folder contains standards — read them. They contain normative requirements to reference during review. Standards may cover:
+   - Architectural principles and rules
+   - Information security requirements (Security Service)
+   - Infrastructure standards
+   - DevOps practices and requirements
+   - Integration standards
 
-5. Прочитай `solutions/index.md` и **2–3 существующих АР** из `solutions/NNN_Название/output/` для понимания общего уровня качества и консистентности между решениями.
+5. Read `solutions/index.md` and **2–3 existing SADs** from `solutions/NNN_Name/output/` to understand the overall quality level and consistency between solutions.
 
-### Фаза 2. Ревью по ролям
+### Phase 2. Review by Roles
 
-Проведи ревью решения последовательно с точки зрения каждой из 5 ролей. Для каждой роли — **вживись в неё**, используй её фокус внимания и компетенции, чтобы выявить замечания, риски и рекомендации.
-
----
-
-#### Роль 1: Solution-архитектор
-
-**Фокус внимания:** техническое качество решения, корректность архитектуры, полнота проработки.
-
-**Компетенции и что проверяет:**
-- **Компонентная архитектура:** правильно ли декомпозировано решение на компоненты/контейнеры? Нет ли смешения ответственностей (SRP)? Нет ли избыточных компонентов?
-- **Интеграционные паттерны:** корректны ли выбранные паттерны взаимодействия (sync/async, request-reply, event-driven)? Есть ли единая точка отказа (SPOF)? Предусмотрена ли обработка ошибок, таймауты, ретраи?
-- **Информационные потоки:** все ли потоки описаны? Соответствуют ли протоколы и форматы данных стандартам? Нет ли неявных потоков, не отражённых в таблице?
-- **Технологический стек:** обоснован ли выбор технологий? Соответствует ли стек принятым стандартам?
-- **НФТ:** достаточны ли нефункциональные требования? Есть ли метрики производительности, доступности, масштабируемости? Реалистичны ли заявленные значения?
-- **Описание доработок:** достаточно ли детализировано описание работ для каждой системы? Можно ли по нему оценить трудозатраты?
-- **Диаграммы vs текст:** соответствуют ли диаграммы (контейнеры, инфопотоки) текстовому описанию? Нет ли расхождений в названиях систем, компонентов, потоков?
-- **Открытые вопросы:** все ли неопределённости зафиксированы? Нет ли скрытых допущений, которые могут повлиять на реализацию?
-- **Полнота решения:** покрывает ли АР все требования из БТ? Нет ли пропущенных функциональных требований?
+Conduct a sequential review of the solution from the perspective of each of the 5 roles. For each role — **embody it**, use its focus area and competencies to identify findings, risks, and recommendations.
 
 ---
 
-#### Роль 2: Enterprise-архитектор
+#### Role 1: Solution Architect
 
-**Фокус внимания:** соответствие IT-ландшафту, переиспользование существующих возможностей, влияние на архитектуру.
+**Focus area:** technical quality of the solution, architecture correctness, completeness of design.
 
-**Компетенции и что проверяет:**
-- **Соответствие IT-ландшафту:** вписывается ли решение в существующий IT-ландшафт (C4-модель)? Не дублирует ли оно возможности уже имеющихся систем?
-- **Переиспользование:** максимально ли используются существующие системы, сервисы, интеграции? Нет ли случаев, когда создаётся новый компонент вместо доработки существующего?
-- **Консистентность:** согласованы ли названия систем и компонентов с CMDB и C4-моделью? Соблюдены ли соглашения об именовании?
-- **Архитектурные принципы:** соблюдены ли архитектурные принципы (если определены в `docs/`)?
-- **Влияние на смежные системы:** оценено ли влияние на смежные системы? Не создаёт ли решение избыточных зависимостей?
-- **Масштабируемость решения:** можно ли решение масштабировать для других бизнес-доменов? Не заложены ли ограничения, которые помешают переиспользованию?
-- **Управление данными:** соответствует ли модель данных стандартам? Не создаётся ли дублирование данных?
-- **Ссылки CMDB:** заполнены ли ссылки CMDB для всех систем? Если нет — для каких систем нужно завести записи?
-
----
-
-#### Роль 3: Специалист по информационной безопасности (Служба ИБ)
-
-**Фокус внимания:** защита информации, соблюдение политик ИБ, управление доступом, аудит.
-
-**Компетенции и что проверяет:**
-- **Аутентификация и авторизация:** все ли межсервисные взаимодействия аутентифицированы и авторизованы? Описаны ли все сервисные учётные записи? Корректны ли типы УЗ (сервисная, JWT и т.д.)?
-- **Управление секретами:** все ли секреты, токены, ключи хранятся в Vault? Нет ли хардкода секретов? Описан ли механизм ротации?
-- **Защита данных в потоках:** какие потоки содержат защищаемую информацию (ПДн, коммерческая тайна, внутренняя информация)? Достаточны ли меры защиты (шифрование, маскирование)?
-- **Око Саурона и LLM:** проходят ли все обращения к LLM через Око Саурона? Реализовано ли маскирование/демаскирование? Есть ли DLP-проверка?
-- **Логирование и аудит:** соответствует ли логирование требованиям Службы ИБ? Логируются ли все критичные операции? Есть ли аудит действий пользователей?
-- **Сетевая безопасность:** описаны ли сетевые сегменты и правила файрвола? В каком неймспейсе размещаются сервисы? Соответствует ли размещение требованиям Службы ИБ?
-- **Доступ к данным:** соблюдается ли принцип минимальных привилегий? Нет ли избыточных прав доступа к Палантиру Задач / Библиотеке / другим системам?
-- **Обмен с внешними системами:** есть ли обмен данными с внешними системами? Если да — одобрен ли он Службой ИБ?
-- **Классификация данных:** определены ли категории обрабатываемых данных? Соответствуют ли меры защиты категории данных?
+**Competencies and what to check:**
+- **Component architecture:** is the solution properly decomposed into components/containers? Is there any mixing of responsibilities (SRP)? Are there redundant components?
+- **Integration patterns:** are the chosen interaction patterns correct (sync/async, request-reply, event-driven)? Is there a single point of failure (SPOF)? Are error handling, timeouts, retries provided for?
+- **Data flows:** are all flows described? Do protocols and data formats match standards? Are there implicit flows not reflected in the table?
+- **Technology stack:** is the technology choice justified? Does the stack match accepted standards?
+- **NFRs:** are non-functional requirements sufficient? Are there performance, availability, scalability metrics? Are claimed values realistic?
+- **Modification descriptions:** are work descriptions sufficiently detailed for each system? Can effort be estimated from them?
+- **Diagrams vs text:** do diagrams (containers, data flows) match the textual description? Are there discrepancies in system names, components, flows?
+- **Open questions:** are all uncertainties documented? Are there hidden assumptions that could affect implementation?
+- **Solution completeness:** does the SAD cover all requirements from the BR? Are there missing functional requirements?
 
 ---
 
-#### Роль 4: Владелец смежной системы
+#### Role 2: Enterprise Architect
 
-**Фокус внимания:** влияние решения на мою систему, новые зависимости, SLA, операционные аспекты.
+**Focus area:** alignment with IT landscape, reuse of existing capabilities, impact on architecture.
 
-**Компетенции и что проверяет:**
-
-Сначала определи **все смежные системы**, затронутые в решении (как существующие, так и новые). Для каждой смежной системы проведи ревью от лица её владельца:
-
-- **Новые зависимости:** какие новые интеграции предлагаются с моей системой? Согласованы ли они?
-- **Нагрузка и SLA:** как решение повлияет на нагрузку моей системы? Укладывается ли предполагаемая нагрузка в текущие лимиты? Не деградирует ли SLA?
-- **Доработки моей системы:** какие доработки предлагаются для моей системы? Реалистичны ли сроки и трудозатраты? Кто будет реализовывать доработки?
-- **Обратная совместимость:** не нарушают ли изменения существующие интеграции моей системы с другими потребителями?
-- **Операционная поддержка:** кто будет поддерживать новые интеграции? Определены ли контакты разработки и команды поддержки? Достаточна ли информация для сопровождения?
-- **Мониторинг и алертинг:** предусмотрен ли мониторинг новых интеграций? Как я узнаю о проблемах?
-- **Откат и деградация:** что произойдёт, если новая интеграция упадёт? Предусмотрен ли graceful degradation?
+**Competencies and what to check:**
+- **IT landscape alignment:** does the solution fit the existing IT landscape (C4 model)? Does it duplicate capabilities of existing systems?
+- **Reuse:** are existing systems, services, integrations maximally utilized? Are there cases where a new component is created instead of enhancing an existing one?
+- **Consistency:** are system and component names aligned with CMDB and C4 model? Are naming conventions followed?
+- **Architectural principles:** are architectural principles followed (if defined in `docs/`)?
+- **Impact on adjacent systems:** has the impact on adjacent systems been assessed? Does the solution create excessive dependencies?
+- **Solution scalability:** can the solution be scaled for other business domains? Are there built-in limitations that would prevent reuse?
+- **Data management:** does the data model conform to standards? Is data being duplicated?
+- **CMDB links:** are CMDB links filled in for all systems? If not — which systems need entries created?
 
 ---
 
-#### Роль 5: Владелец бизнес-процесса
+#### Role 3: Information Security Specialist (Security Service)
 
-**Фокус внимания:** покрытие бизнес-требований, удобство для конечных пользователей, бизнес-ценность.
+**Focus area:** information protection, compliance with security policies, access management, audit.
 
-**Компетенции и что проверяет:**
-- **Покрытие требований:** все ли бизнес-требования из БТ реализованы в АР? Составь маппинг: требование → как реализовано в АР. Отметь пропущенные или частично покрытые требования.
-- **Пользовательский путь (User Journey):** описан ли полный путь пользователя? Понятен ли он? Нет ли лишних шагов или неочевидных действий?
-- **Бизнес-ценность:** решает ли АР заявленные бизнес-проблемы? Будет ли достигнут ожидаемый эффект (снижение трудозатрат, повышение качества и т.д.)?
-- **Ограничения для бизнеса:** какие ограничения налагает техническое решение на бизнес-процесс? Приемлемы ли они?
-- **Удобство использования:** насколько удобно решение для конечных пользователей (владельцев процессов, аналитиков, методологов)? Учтены ли их потребности?
-- **Итеративность и гибкость:** поддерживает ли решение итеративное уточнение? Можно ли дорабатывать артефакты через цепочку промптов?
-- **Качество артефактов:** как обеспечивается качество генерируемых BPMN/BRD? Достаточна ли валидация? Соответствуют ли артефакты стандартам?
-- **Открытые вопросы:** есть ли нерешённые вопросы, блокирующие запуск? Влияют ли «за рамками текущей задачи» ограничения на бизнес-ценность?
+**Competencies and what to check:**
+- **Authentication and authorization:** are all inter-service interactions authenticated and authorized? Are all service accounts described? Are account types correct (service, JWT, etc.)?
+- **Secret management:** are all secrets, tokens, keys stored in Vault? Are there hardcoded secrets? Is the rotation mechanism described?
+- **Data protection in flows:** which flows contain protected information (PII, trade secrets, internal information)? Are protection measures sufficient (encryption, masking)?
+- **Eye of Sauron and LLM:** do all LLM calls go through the Eye of Sauron? Is masking/unmasking implemented? Is there DLP verification?
+- **Logging and audit:** does logging meet Security Service requirements? Are all critical operations logged? Is user action audit in place?
+- **Network security:** are network segments and firewall rules described? In which namespace are services deployed? Does placement meet Security Service requirements?
+- **Data access:** is the principle of least privilege followed? Are there excessive access rights to the Task Palantir / Library / other systems?
+- **External system exchange:** is there data exchange with external systems? If so — is it approved by the Security Service?
+- **Data classification:** are categories of processed data defined? Do protection measures match the data category?
 
 ---
 
-### Фаза 3. Формирование отчёта
+#### Role 4: Adjacent System Owner
 
-Создай файл `<папка решения>/output/Ревью АР <Название>.md` по следующему шаблону:
+**Focus area:** impact of the solution on my system, new dependencies, SLA, operational aspects.
+
+**Competencies and what to check:**
+
+First identify **all adjacent systems** affected by the solution (both existing and new). For each adjacent system, conduct a review as its owner:
+
+- **New dependencies:** what new integrations are proposed with my system? Are they agreed upon?
+- **Load and SLA:** how will the solution impact my system's load? Does the expected load fit within current limits? Will SLA degrade?
+- **Modifications to my system:** what modifications are proposed for my system? Are timelines and effort realistic? Who will implement the modifications?
+- **Backward compatibility:** do the changes break existing integrations of my system with other consumers?
+- **Operational support:** who will support the new integrations? Are development contacts and support teams defined? Is the support information sufficient?
+- **Monitoring and alerting:** is monitoring of new integrations provided for? How will I learn about problems?
+- **Rollback and degradation:** what happens if the new integration fails? Is graceful degradation provided for?
+
+---
+
+#### Role 5: Business Process Owner
+
+**Focus area:** coverage of business requirements, end-user convenience, business value.
+
+**Competencies and what to check:**
+- **Requirements coverage:** are all business requirements from the BR implemented in the SAD? Compose a mapping: requirement → how it's implemented in the SAD. Mark missing or partially covered requirements.
+- **User journey:** is the full user journey described? Is it clear? Are there unnecessary steps or non-obvious actions?
+- **Business value:** does the SAD solve the stated business problems? Will the expected outcome be achieved (reduced effort, improved quality, etc.)?
+- **Business constraints:** what constraints does the technical solution impose on the business process? Are they acceptable?
+- **Usability:** how convenient is the solution for end users (process owners, analysts, methodologists)? Are their needs considered?
+- **Iterability and flexibility:** does the solution support iterative refinement? Can artifacts be improved through prompt chains?
+- **Artifact quality:** how is the quality of generated BPMN/BRD ensured? Is validation sufficient? Do artifacts meet standards?
+- **Open questions:** are there unresolved questions blocking launch? Do "out of scope" limitations affect business value?
+
+---
+
+### Phase 3. Report Generation
+
+Create the file `<solution folder>/output/SAD Review <Name>.md` using the following template:
 
 ```markdown
-# Ревью АР <Название>
+# SAD Review <Name>
 
-**Дата ревью:** <текущая дата>
-**Ревьюируемый документ:** [АР <Название>](АР <Название>.md)
+**Review date:** <current date>
+**Reviewed document:** [SAD <Name>](SAD <Name>.md)
 
-## Сводка
+## Summary
 
-| Роль | Критичных | Существенных | Незначительных | Рекомендаций |
+| Role | Critical | Significant | Minor | Recommendations |
 | --- | --- | --- | --- | --- |
-| Solution-архитектор | N | N | N | N |
-| Enterprise-архитектор | N | N | N | N |
-| Специалист по ИБ (Служба ИБ) | N | N | N | N |
-| Владелец смежной системы | N | N | N | N |
-| Владелец бизнес-процесса | N | N | N | N |
-| **Итого** | **N** | **N** | **N** | **N** |
+| Solution Architect | N | N | N | N |
+| Enterprise Architect | N | N | N | N |
+| Security Specialist (Security Service) | N | N | N | N |
+| Adjacent System Owner | N | N | N | N |
+| Business Process Owner | N | N | N | N |
+| **Total** | **N** | **N** | **N** | **N** |
 
-### Классификация замечаний
+### Finding Classification
 
-- 🔴 **Критичное** — блокирует реализацию или создаёт существенный риск. Требует обязательного исправления до согласования АР.
-- 🟡 **Существенное** — значимый недостаток, который нужно устранить, но не блокирует реализацию.
-- 🟢 **Незначительное** — мелкий недочёт, опечатка, стилистическое замечание.
-- 💡 **Рекомендация** — предложение по улучшению, не является замечанием.
+- 🔴 **Critical** — blocks implementation or creates significant risk. Requires mandatory correction before SAD approval.
+- 🟡 **Significant** — notable deficiency that needs to be addressed, but doesn't block implementation.
+- 🟢 **Minor** — small defect, typo, stylistic comment.
+- 💡 **Recommendation** — improvement suggestion, not a finding.
 
 ---
 
-## 1. Solution-архитектор
+## 1. Solution Architect
 
-### Замечания
+### Findings
 
-| № | Серьёзность | Раздел АР | Описание | Рекомендация |
+| # | Severity | SAD Section | Description | Recommendation |
 | --- | --- | --- | --- | --- |
-| SA-1 | 🔴/🟡/🟢 | <раздел> | <описание проблемы> | <что нужно сделать> |
+| SA-1 | 🔴/🟡/🟢 | <section> | <problem description> | <what needs to be done> |
 | ... | ... | ... | ... | ... |
 
-### Общая оценка
+### Overall Assessment
 
-<Краткое резюме от лица Solution-архитектора: сильные стороны решения и основные области для улучшения>
+<Brief summary from the Solution Architect perspective: strengths of the solution and main areas for improvement>
 
 ---
 
-## 2. Enterprise-архитектор
+## 2. Enterprise Architect
 
-### Замечания
+### Findings
 
-| № | Серьёзность | Раздел АР | Описание | Рекомендация |
+| # | Severity | SAD Section | Description | Recommendation |
 | --- | --- | --- | --- | --- |
-| EA-1 | 🔴/🟡/🟢 | <раздел> | <описание проблемы> | <что нужно сделать> |
+| EA-1 | 🔴/🟡/🟢 | <section> | <problem description> | <what needs to be done> |
 | ... | ... | ... | ... | ... |
 
-### Общая оценка
+### Overall Assessment
 
-<Краткое резюме от лица Enterprise-архитектора>
+<Brief summary from the Enterprise Architect perspective>
 
 ---
 
-## 3. Специалист по информационной безопасности (Служба ИБ)
+## 3. Information Security Specialist (Security Service)
 
-### Замечания
+### Findings
 
-| № | Серьёзность | Раздел АР | Описание | Рекомендация |
+| # | Severity | SAD Section | Description | Recommendation |
 | --- | --- | --- | --- | --- |
-| SEC-1 | 🔴/🟡/🟢 | <раздел> | <описание проблемы> | <что нужно сделать> |
+| SEC-1 | 🔴/🟡/🟢 | <section> | <problem description> | <what needs to be done> |
 | ... | ... | ... | ... | ... |
 
-### Общая оценка
+### Overall Assessment
 
-<Краткое резюме от лица специалиста по ИБ>
+<Brief summary from the Security Specialist perspective>
 
 ---
 
-## 4. Владелец смежной системы
+## 4. Adjacent System Owner
 
-Для каждой затронутой смежной системы — отдельный подраздел.
+For each affected adjacent system — a separate subsection.
 
-### 4.1 <Название системы 1>
+### 4.1 <System Name 1>
 
-| № | Серьёзность | Раздел АР | Описание | Рекомендация |
+| # | Severity | SAD Section | Description | Recommendation |
 | --- | --- | --- | --- | --- |
-| SYS-1 | 🔴/🟡/🟢 | <раздел> | <описание проблемы> | <что нужно сделать> |
+| SYS-1 | 🔴/🟡/🟢 | <section> | <problem description> | <what needs to be done> |
 | ... | ... | ... | ... | ... |
 
-### 4.2 <Название системы 2>
+### 4.2 <System Name 2>
 
-| № | Серьёзность | Раздел АР | Описание | Рекомендация |
+| # | Severity | SAD Section | Description | Recommendation |
 | --- | --- | --- | --- | --- |
-| SYS-N | 🔴/🟡/🟢 | <раздел> | <описание проблемы> | <что нужно сделать> |
+| SYS-N | 🔴/🟡/🟢 | <section> | <problem description> | <what needs to be done> |
 | ... | ... | ... | ... | ... |
 
-### Общая оценка
+### Overall Assessment
 
-<Краткое резюме от лица владельцев смежных систем>
+<Brief summary from the adjacent system owners' perspective>
 
 ---
 
-## 5. Владелец бизнес-процесса
+## 5. Business Process Owner
 
-### Покрытие бизнес-требований
+### Business Requirements Coverage
 
-| Требование из БТ | Статус | Комментарий |
+| Requirement from BR | Status | Comment |
 | --- | --- | --- |
-| <требование> | ✅ Покрыто / ⚠️ Частично / ❌ Не покрыто | <пояснение> |
+| <requirement> | ✅ Covered / ⚠️ Partial / ❌ Not covered | <explanation> |
 | ... | ... | ... |
 
-### Замечания
+### Findings
 
-| № | Серьёзность | Раздел АР | Описание | Рекомендация |
+| # | Severity | SAD Section | Description | Recommendation |
 | --- | --- | --- | --- | --- |
-| BIZ-1 | 🔴/🟡/🟢 | <раздел> | <описание проблемы> | <что нужно сделать> |
+| BIZ-1 | 🔴/🟡/🟢 | <section> | <problem description> | <what needs to be done> |
 | ... | ... | ... | ... | ... |
 
-### Общая оценка
+### Overall Assessment
 
-<Краткое резюме от лица владельца бизнес-процесса>
+<Brief summary from the Business Process Owner perspective>
 
 ---
 
-## Итоговое заключение
+## Final Conclusion
 
-<Общее резюме по результатам ревью всеми ролями. Ключевые риски, обязательные доработки, рекомендации по дальнейшим шагам>
+<Overall summary of the review across all roles. Key risks, mandatory improvements, recommendations for next steps>
 
-### Рекомендуемый порядок устранения замечаний
+### Recommended Order for Addressing Findings
 
-1. <Критичные замечания — по приоритету>
-2. <Существенные замечания — по приоритету>
-3. <Незначительные замечания и рекомендации>
+1. <Critical findings — by priority>
+2. <Significant findings — by priority>
+3. <Minor findings and recommendations>
 ```
 
-### Фаза 4. Финальная проверка
+### Phase 4. Final Verification
 
-1. Перечитай сформированный отчёт и убедись:
-   - Все 5 ролей представлены
-   - Сводная таблица корректно отражает количество замечаний
-   - Нумерация замечаний сквозная внутри каждой роли (SA-1, SA-2, ...; EA-1, EA-2, ...; и т.д.)
-   - Замечания конкретны — ссылаются на конкретный раздел АР и содержат actionable рекомендации
-   - Нет дублирования замечаний между ролями (если пересекается — указать в замечании «см. также SA-N» или подобную перекрёстную ссылку)
-2. Выведи пользователю сводку: сколько замечаний по каждой роли и общий вердикт
+1. Re-read the generated report and verify:
+   - All 5 roles are represented
+   - Summary table correctly reflects the number of findings
+   - Finding numbering is sequential within each role (SA-1, SA-2, ...; EA-1, EA-2, ...; etc.)
+   - Findings are specific — reference specific SAD sections and contain actionable recommendations
+   - No duplicate findings between roles (if overlapping — include cross-reference like "see also SA-N")
+2. Present a summary to the user: finding count per role and overall verdict
 
-## Правила проведения ревью
+## Review Rules
 
-- **Будь конкретен:** каждое замечание должно ссылаться на конкретный раздел, таблицу или формулировку в АР. Избегай общих фраз вроде «недостаточно проработано».
-- **Будь конструктивен:** каждое замечание должно содержать рекомендацию по исправлению.
-- **Учитывай контекст:** опирайся на бизнес-требования из `input/`, стандарты из `docs/`, существующую C4-модель и другие АР.
-- **Не придумывай проблем:** если раздел проработан хорошо — отметь это в общей оценке. Не нужно искать замечания там, где их нет.
-- **Разделяй роли:** замечание от Solution-архитектора не должно касаться ИБ (это зона Службы ИБ), а замечание от Службы ИБ не должно касаться бизнес-ценности (это зона владельца процесса). Если замечание на стыке — помести его в наиболее релевантную роль и добавь перекрёстную ссылку.
+- **Be specific:** each finding must reference a specific section, table, or wording in the SAD. Avoid generic phrases like "insufficiently detailed."
+- **Be constructive:** each finding must include a correction recommendation.
+- **Consider context:** reference business requirements from `input/`, standards from `docs/`, the existing C4 model, and other SADs.
+- **Don't invent problems:** if a section is well designed — note it in the overall assessment. Don't look for findings where there are none.
+- **Separate roles:** a finding from the Solution Architect should not concern security (that's the Security Service's domain), and a Security Service finding should not concern business value (that's the Process Owner's domain). If a finding spans roles — place it in the most relevant role and add a cross-reference.

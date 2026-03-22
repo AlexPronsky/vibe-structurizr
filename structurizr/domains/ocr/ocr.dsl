@@ -1,9 +1,9 @@
-// Рунические Мастерские
+// Runic Workshops
 
-// Системы
-group "Рунические Мастерские" {
-    dwarven_runes = softwareSystem "Руны Гномов" "Расшифровка древних свитков"
+// Systems
+group "Runic Workshops" {
+    dwarven_runes = softwareSystem "Dwarven Runes" "Deciphering ancient scrolls"
 }
 
-// Связи систем
-dwarven_runes -> eye_of_sauron "Просит Око расшифровать руны" "REST/HTTPS"
+// System relationships
+dwarven_runes -> eye_of_sauron "Asks the Eye to decipher runes" "REST/HTTPS"

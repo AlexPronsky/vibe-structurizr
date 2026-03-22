@@ -1,5 +1,5 @@
-// Экспорт диаграмм Structurizr в SVG через Puppeteer
-// Основан на https://github.com/structurizr/puppeteer
+// Export Structurizr diagrams to SVG via Puppeteer
+// Based on https://github.com/structurizr/puppeteer
 
 const puppeteer = require('puppeteer');
 const fs = require('fs');
@@ -8,15 +8,15 @@ const path = require('path');
 const IMAGE_VIEW_TYPE = 'Image';
 
 if (process.argv.length < 3) {
-  console.log("Использование: node export-diagrams.js <structurizrUrl> [outputDir]");
-  console.log("Пример:        node export-diagrams.js http://structurizr:8080/workspace/diagrams /output");
+  console.log("Usage: node export-diagrams.js <structurizrUrl> [outputDir]");
+  console.log("Example: node export-diagrams.js http://structurizr:8080/workspace/diagrams /output");
   process.exit(1);
 }
 
 const url = process.argv[2];
 const outputDir = process.argv[3] || '.';
 
-// Убедиться, что каталог вывода существует
+// Ensure output directory exists
 fs.mkdirSync(outputDir, { recursive: true });
 
 (async () => {
@@ -27,21 +27,21 @@ fs.mkdirSync(outputDir, { recursive: true });
 
   const page = await browser.newPage();
 
-  console.log(" - Открываю " + url);
+  console.log(" - Opening " + url);
   await page.goto(url, { waitUntil: 'domcontentloaded' });
 
-  // Ждём, пока Structurizr полностью отрендерит диаграмму
+  // Wait for Structurizr to fully render the diagram
   await page.waitForFunction(
     'structurizr.scripting && structurizr.scripting.isDiagramRendered() === true',
     { timeout: 30000 }
   );
 
-  // Получаем список всех представлений
+  // Get list of all views
   const views = await page.evaluate(() => {
     return structurizr.scripting.getViews();
   });
 
-  console.log(" - Найдено представлений: " + views.length);
+  console.log(" - Views found: " + views.length);
 
   let exported = 0;
 
@@ -55,7 +55,7 @@ fs.mkdirSync(outputDir, { recursive: true });
       { timeout: 15000 }
     );
 
-    // Экспорт диаграммы
+    // Export diagram
     const diagramFile = path.join(outputDir, view.key + '.svg');
     const svgDiagram = await page.evaluate(() => {
       return structurizr.scripting.exportCurrentDiagramToSVG({ includeMetadata: true });
@@ -64,7 +64,7 @@ fs.mkdirSync(outputDir, { recursive: true });
     console.log(" - " + view.key + '.svg');
     exported++;
 
-    // Экспорт легенды (для не-Image представлений)
+    // Export legend (for non-Image views)
     if (view.type !== IMAGE_VIEW_TYPE) {
       const keyFile = path.join(outputDir, view.key + '-key.svg');
       const svgKey = await page.evaluate(() => {
@@ -76,6 +76,6 @@ fs.mkdirSync(outputDir, { recursive: true });
     }
   }
 
-  console.log(" - Готово! Экспортировано файлов: " + exported);
+  console.log(" - Done! Files exported: " + exported);
   await browser.close();
 })();

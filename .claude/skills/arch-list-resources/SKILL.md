@@ -1,42 +1,42 @@
 ---
 name: arch-list-resources
-description: Собрать список всех контейнеров из Structurizr DSL и сгенерировать таблицу ресурсов в resources.md
+description: Collect all containers from Structurizr DSL and generate a resource table in resources.md
 allowed-tools: Read, Grep, Glob, Write, Edit, Bash
 ---
 
-# Сбор контейнеров из Structurizr DSL
+# Collecting Containers from Structurizr DSL
 
-## Задача
+## Task
 
-Найти все определения `container` во всех `.dsl` файлах проекта и сгенерировать Markdown-таблицу.
+Find all `container` definitions in all `.dsl` files of the project and generate a Markdown table.
 
-## Алгоритм
+## Algorithm
 
-1. Найди все `.dsl` файлы в `structurizr/`:
+1. Find all `.dsl` files in `structurizr/`:
    ```
    Glob: structurizr/**/*.dsl
    ```
 
-2. В каждом файле найди блоки `!element <system_id>` — они содержат контейнеры. Имя системы бери из определения `softwareSystem` в том же файле (или в `common.dsl`).
+2. In each file, find `!element <system_id>` blocks — they contain containers. Get the system name from the `softwareSystem` definition in the same file (or in `common.dsl`).
 
-3. Внутри `!element` найди все строки вида:
+3. Inside `!element`, find all lines of the form:
    ```
-   <id> = container "<Название>" ...
+   <id> = container "<Name>" ...
    ```
-   Извлеки **название контейнера** (первый строковый аргумент в кавычках после `container`).
+   Extract the **container name** (the first string argument in quotes after `container`).
 
-4. Определи **название системы** — найди `softwareSystem` с соответствующим идентификатором. Название — первый аргумент в кавычках.
+4. Determine the **system name** — find the `softwareSystem` with the corresponding identifier. The name is the first argument in quotes.
 
-5. Сгенерируй файл **`resources.md` в корне проекта** (путь: `./resources.md`, НЕ в `solutions/`) со следующим содержимым:
+5. Generate the file **`resources.md` in the project root** (path: `./resources.md`, NOT in `solutions/`) with the following content:
 
 ```markdown
-# Ресурсы контейнеров
+# Container Resources
 
-| Система | Контейнер | CPU | RAM | GPU | SSD | Реплики |
-|---------|-----------|-----|-----|-----|-----|---------|
-| <название системы> | <название контейнера> | | | | | |
+| System | Container | CPU | RAM | GPU | SSD | Replicas |
+|--------|-----------|-----|-----|-----|-----|----------|
+| <system name> | <container name> | | | | | |
 ```
 
-- Строки группируй по системе (все контейнеры одной системы идут подряд)
-- Сортируй системы по алфавиту, контейнеры внутри системы — тоже по алфавиту
-- Колонки CPU, RAM, GPU, SSD, Реплики оставь пустыми
+- Group rows by system (all containers of one system listed together)
+- Sort systems alphabetically, containers within a system — also alphabetically
+- Leave CPU, RAM, GPU, SSD, Replicas columns empty

@@ -1,84 +1,84 @@
 # CLAUDE.md
 
-## Описание проекта
+## Project Description
 
-Демо-репозиторий архитектуры Средиземья. Содержит:
-- C4-модель Карты Средиземья (Structurizr DSL)
-- Проектные решения с бизнес-требованиями (БТ) и архитектурными решениями (АР)
+Demo repository of Middle-earth architecture. Contains:
+- C4 model of the Map of Middle-earth (Structurizr DSL)
+- Design solutions with business requirements (BR) and solution architecture documents (SAD)
 
-Язык всей документации, комментариев и коммитов — **русский**.
+Language of all documentation, comments, and commits — **English**.
 
-## Структура проекта
+## Project Structure
 
 ```
 structurizr/
-  workspace.dsl            # Главный файл — собирает всё через !include
-  workspace.json           # НЕ РЕДАКТИРОВАТЬ И НЕ УДАЛЯТЬ (координаты элементов + auto-save из UI)
-  common.dsl               # Народы и общие системы Средиземья
+  workspace.dsl            # Main file — assembles everything via !include
+  workspace.json           # DO NOT EDIT OR DELETE (element coordinates + auto-save from UI)
+  common.dsl               # Peoples and common systems of Middle-earth
   domains/
-    genai/                 # Энты-Советники, Целитель Элронд, Летописец Бильбо
-    agents/                # Братство Кольца, Перекрёсток Бри
-    mlops_and_classic_ml/  # Кольца Власти, Эльфийские Клинки
-    ocr/                   # Руны Гномов
-    speech_analytics/      # Слухачи Изенгарда, Палантир Арагорна
+    genai/                 # Ent Advisors, Elrond the Healer, Bilbo the Chronicler
+    agents/                # Fellowship of the Ring, Crossroads of Bree
+    mlops_and_classic_ml/  # Rings of Power, Elven Blades
+    ocr/                   # Dwarven Runes
+    speech_analytics/      # Isengard Listeners, Aragorn's Palantir
 solutions/
-  index.md                 # Сводный реестр решений
-  NNN_Название/
-    input/                 # Бизнес-требования (БТ*.md) и схемы (*.png)
-    output/                # Архитектурные решения (АР*.md)
+  index.md                 # Solution registry
+  NNN_Name/
+    input/                 # Business requirements (BR*.md) and diagrams (*.png)
+    output/                # Solution architecture documents (SAD*.md)
 scripts/
-  validate-dsl.sh          # Валидация DSL через Structurizr API
-  export-svg.sh            # Экспорт диаграмм в SVG (Puppeteer)
-  export-diagrams.js       # JS-скрипт экспорта (используется export-svg.sh)
+  validate-dsl.sh          # DSL validation via Structurizr API
+  export-svg.sh            # Diagram export to SVG (Puppeteer)
+  export-diagrams.js       # JS export script (used by export-svg.sh)
 .claude/
-  skills/                  # Claude Code skills (генерация АР, список ресурсов, экспорт SVG)
+  skills/                  # Claude Code skills (SAD generation, resource list, SVG export)
 ```
 
-## Structurizr DSL — соглашения
+## Structurizr DSL — Conventions
 
-- Модульная структура: каждый домен = `[domain].dsl` (модель) + `views.dsl` (представления)
-- `workspace.dsl` использует `!identifiers hierarchical` — все идентификаторы иерархические
-- **НИКОГДА не удалять `workspace.json`** — содержит вручную выставленные координаты элементов на диаграммах
-- **Область видимости в `!element`:** из блока `!element systemA` **нельзя ссылаться на контейнеры другой системы** — ни через `system.container` (например `bree_crossroads.knowledge_palantir`), ни по простому имени (например `ent_core` из `!element bree_crossroads`). Контейнер виден только внутри `!element` своей системы. Для кросс-системных связей на контейнерном уровне используй `softwareSystem -> container` или `container -> softwareSystem` (система-уровень одной стороны всегда доступен)
-- Общие элементы (народы, Орлы Манвэ, Истари) определены в `common.dsl`, доступны во всех доменах
-- Комментарии в DSL-файлах — на русском (`// Связи систем`)
-- Связи описываются с указанием протокола: `"REST/HTTPS"`, `"kafka"`, `"TCP"`
-- **Направление autoLayout:** ландшафт и системные диаграммы (systemLandscape, systemContext) — сверху вниз (`autoLayout` без параметров). Контейнерные диаграммы (container) — слева направо (`autoLayout lr`)
+- Modular structure: each domain = `[domain].dsl` (model) + `views.dsl` (views)
+- `workspace.dsl` uses `!identifiers hierarchical` — all identifiers are hierarchical
+- **NEVER delete `workspace.json`** — contains manually positioned element coordinates on diagrams
+- **Scope in `!element`:** from an `!element systemA` block you **cannot reference containers of another system** — neither via `system.container` (e.g. `bree_crossroads.knowledge_palantir`), nor by simple name (e.g. `ent_core` from `!element bree_crossroads`). A container is visible only inside the `!element` of its own system. For cross-system relationships at the container level, use `softwareSystem -> container` or `container -> softwareSystem` (the system-level side is always accessible)
+- Common elements (peoples, Eagles of Manwe, Istari) are defined in `common.dsl`, available across all domains
+- Comments in DSL files — in English (`// System relationships`)
+- Relationships include protocol: `"REST/HTTPS"`, `"kafka"`, `"TCP"`
+- **autoLayout direction:** landscape and system diagrams (systemLandscape, systemContext) — top to bottom (`autoLayout` without parameters). Container diagrams (container) — left to right (`autoLayout lr`)
 
-### Теги и стили элементов
+### Element Tags and Styles
 
-| Тег | Назначение | Визуальный стиль |
-|-----|-----------|-----------------|
-| `External` | Внешние системы | Серый (#666666) |
-| `DB` | Базы данных | Форма Cylinder |
-| `Pipe` | Kafka, очереди | Форма Pipe |
-| `NotInProd` | Артефакты, ещё не покинувшие кузницу | Пунктирная рамка, полупрозрачность |
-| `Dataflow` | Информационные потоки | Пунктирная линия |
-| `New` | Новые системы/контейнеры/связи | Зелёная рамка (#2EA44F) |
-| `Changed` | Изменяемые системы/контейнеры/связи | Тёмно-синяя рамка (#1B3A6B) |
+| Tag | Purpose | Visual Style |
+|-----|---------|-------------|
+| `External` | External systems | Grey (#666666) |
+| `DB` | Databases | Cylinder shape |
+| `Pipe` | Kafka, queues | Pipe shape |
+| `NotInProd` | Artifacts not yet deployed to production | Dashed border, semi-transparent |
+| `Dataflow` | Data flows | Dashed line |
+| `New` | New systems/containers/relationships | Green border (#2EA44F) |
+| `Changed` | Modified systems/containers/relationships | Dark blue border (#1B3A6B) |
 
-### Пример добавления новой системы в домен
+### Example: Adding a New System to a Domain
 
 ```dsl
-// В файле domains/[domain]/[domain].dsl
-new_system = softwareSystem "Название" "Описание"
+// In file domains/[domain]/[domain].dsl
+new_system = softwareSystem "Name" "Description"
 
-// Внешняя система
-ext_system = softwareSystem "Название" "Описание" "External"
+// External system
+ext_system = softwareSystem "Name" "Description" "External"
 
-// Связь
-new_system -> eye_of_sauron "Обращается к Оку" "REST/HTTPS"
+// Relationship
+new_system -> eye_of_sauron "Consults the Eye" "REST/HTTPS"
 ```
 
-### Сводные views для решений (solution views)
+### Solution Views (Consolidated Views)
 
-Если решение затрагивает контейнеры в нескольких системах, создавай **единый сводный view** для этого решения, объединяющий все задействованные контейнеры. Формат ключа: `solution_NNN_containers` и `solution_NNN_dataflow`.
+If a solution affects containers in multiple systems, create a **single consolidated view** for that solution combining all involved containers. Key format: `solution_NNN_containers` and `solution_NNN_dataflow`.
 
-Container view создаётся от любой из затронутых систем. Контейнеры другой системы включаются через `include "element.parent==<system>"`, а связанные внешние системы — через `include "->element.parent==<system>->"` ([документация](https://docs.structurizr.com/dsl/cookbook/container-view-multiple-software-systems/)):
+Container view is created from any of the affected systems. Containers of other systems are included via `include "element.parent==<system>"`, and related external systems via `include "->element.parent==<system>->"` ([documentation](https://docs.structurizr.com/dsl/cookbook/container-view-multiple-software-systems/)):
 
 ```dsl
-// Сводный container view для решения
-container primary_system "solution_NNN_containers" "Решение NNN: системная архитектура" {
+// Consolidated container view for the solution
+container primary_system "solution_NNN_containers" "Solution NNN: system architecture" {
     include "element.parent==primary_system"
     include "element.parent==other_system"
     include "->element.parent==primary_system->"
@@ -89,98 +89,98 @@ container primary_system "solution_NNN_containers" "Решение NNN: сист
 }
 ```
 
-Нумерация INFxx-потоков — **сквозная** по всем `!element` блокам в рамках решения.
+INFxx flow numbering is **sequential** across all `!element` blocks within a solution.
 
-## Документы решений (АР/БТ) — структура
+## Solution Documents (SAD/BR) — Structure
 
-Каждый АР следует шаблону:
-1. **Общие сведения** — глоссарий, описание проекта
-2. **Бизнес-архитектура** — ссылка на БТ, бизнес-требования
-3. **Архитектурное решение** — системы, информационные потоки, схемы
-4. **Требования к реализации**
-5. **Информационная безопасность**
+Each SAD follows the template:
+1. **General Information** — glossary, project description
+2. **Business Architecture** — link to BR, business requirements
+3. **Architecture Solution** — systems, data flows, diagrams
+4. **Implementation Requirements**
+5. **Information Security**
 
-Используются Markdown-таблицы для систем, потоков, глоссариев.
+Markdown tables are used for systems, flows, and glossaries.
 
-### Правила АР-документа
+### SAD Document Rules
 
-- В разделе **3.2 Информационная архитектура** — **одна** таблица инфопотоков (со сквозной INF-нумерацией) и **одна** диаграмма инфопотоков (из solution view) + легенда
-- В разделе **3.3 Системная архитектура** — **одна** диаграмма контейнеров (из solution view) + легенда
-- Если решение затрагивает несколько систем — используется сводный solution view, а не отдельные диаграммы для каждой системы
+- In section **3.2 Information Architecture** — **one** data flow table (with sequential INF numbering) and **one** data flow diagram (from solution view) + legend
+- In section **3.3 System Architecture** — **one** container diagram (from solution view) + legend
+- If the solution spans multiple systems — use the consolidated solution view, not separate diagrams per system
 
-## Среда разработки (Dev Container + Docker)
+## Development Environment (Dev Container + Docker)
 
-Проект запускается внутри **VS Code Dev Container** на WSL2. Docker-контейнеры (Structurizr и др.) запускаются через Docker-in-Docker.
+The project runs inside a **VS Code Dev Container** on WSL2. Docker containers (Structurizr etc.) run via Docker-in-Docker.
 
-### Сетевые особенности
+### Networking Details
 
-- Dev Container находится в сети `bridge`, Structurizr — в `ai-arch_default`. По умолчанию **они не видят друг друга**.
-- `host.docker.internal` **не работает** надёжно в WSL2 Dev Containers — не использовать.
-- Для связи нужно подключить Dev Container к сети Structurizr:
+- Dev Container is on the `bridge` network, Structurizr on `ai-arch_default`. By default, **they cannot see each other**.
+- `host.docker.internal` **does not work** reliably in WSL2 Dev Containers — do not use.
+- To connect, attach the Dev Container to Structurizr's network:
   ```bash
   docker network connect ai-arch_default $(hostname)
   ```
-  После этого Structurizr доступен по имени контейнера: `http://structurizr:8080`
+  After this, Structurizr is accessible by container name: `http://structurizr:8080`
 
 ### Docker volume mounts
 
-При запуске `docker run` из Dev Container тома монтируются **относительно хоста Windows**, не Dev Container.
-Используй переменную `HOST_PROJECT_ROOT` (содержит хостовый путь к проекту):
+When running `docker run` from the Dev Container, volumes are mounted **relative to the Windows host**, not the Dev Container.
+Use the `HOST_PROJECT_ROOT` variable (contains the host path to the project):
 ```bash
 docker run --rm -v "${HOST_PROJECT_ROOT}/structurizr:/work" ...
 ```
-**Не использовать** `/workspaces/ai-arch/...` в `-v` — Docker-демон не увидит этот путь.
+**Do not use** `/workspaces/ai-arch/...` in `-v` — the Docker daemon cannot see this path.
 
-## Команды
+## Commands
 
 ```bash
-# Запуск Structurizr (web UI на http://localhost:8080)
+# Start Structurizr (web UI at http://localhost:8080)
 docker compose up -d
 
-# Остановка
+# Stop
 docker compose down
 ```
 
-## Валидация DSL
+## DSL Validation
 
-После изменения DSL-файлов **обязательно** проверяй результат через скрипт валидации:
+After changing DSL files, **always** verify the result using the validation script:
 
 ```bash
 scripts/validate-dsl.sh
 ```
 
-Скрипт автоматически перезапускает Structurizr (сброс кэша), вызывает API с HMAC-авторизацией и проверяет парсинг DSL. Код возврата: 0 — валиден, 1 — ошибка (с текстом).
+The script automatically restarts Structurizr (cache reset), calls the API with HMAC authorization, and verifies DSL parsing. Exit code: 0 — valid, 1 — error (with message).
 
-> **Важно:** Старый способ проверки через `curl -s http://structurizr:8080/workspace/diagrams > /dev/null` + `grep -i ERROR` в логах **НЕ РАБОТАЕТ** — endpoint `/workspace/diagrams` возвращает HTML-оболочку без парсинга DSL. Парсинг происходит только при загрузке workspace JSON через API (`/api/workspace/1`), для которого нужна HMAC-авторизация. Скрипт `validate-dsl.sh` делает это автоматически.
+> **Important:** The old verification method via `curl -s http://structurizr:8080/workspace/diagrams > /dev/null` + `grep -i ERROR` in logs **DOES NOT WORK** — the `/workspace/diagrams` endpoint returns an HTML shell without parsing DSL. Parsing only occurs when loading workspace JSON via API (`/api/workspace/1`), which requires HMAC authorization. The `validate-dsl.sh` script does this automatically.
 
-### Экспорт диаграмм в SVG
+### Diagram Export to SVG
 
-Экспорт через Puppeteer — рендерит диаграммы точно как в UI, сохраняя ручные координаты из `workspace.json`:
+Export via Puppeteer — renders diagrams exactly as in the UI, preserving manual coordinates from `workspace.json`:
 ```bash
 scripts/export-svg.sh
 ```
-Скрипт автоматически запустит Structurizr (если не запущен), настроит сеть и экспортирует все диаграммы.
-Результат: SVG-файлы в `structurizr/export/`, читаемые через `Read`.
-После проверки удалить: `rm -rf structurizr/export`
+The script will automatically start Structurizr (if not running), configure the network, and export all diagrams.
+Result: SVG files in `structurizr/export/`, readable via `Read`.
+After review, delete: `rm -rf structurizr/export`
 
-## Особенности файловой системы (9p / WSL2)
+## File System Quirks (9p / WSL2)
 
-Проект смонтирован через 9p (Windows → WSL2 → Dev Container). Кэш метаданных 9p может рассинхронизироваться при быстрых последовательных операциях, из-за чего файл становится «повреждённым» (`???????` в правах, ENOENT при stat).
+The project is mounted via 9p (Windows → WSL2 → Dev Container). The 9p metadata cache can desynchronize during rapid sequential operations, causing files to become "corrupted" (`???????` in permissions, ENOENT on stat).
 
-**Как предотвратить:**
-- **Не используй Edit/Read сразу после Write** для того же файла — это основной триггер. Если нужно создать файл и сразу дополнить — пиши полное содержимое одним вызовом Write
-- При создании нового файла через Write — **подожди** (`sync && sleep 1`) перед Edit/Read этого файла
-- Альтернатива: создавай файлы через `bash` (`cat > file << 'EOF'`), это использует один системный вызов и не вызывает проблему
+**Prevention:**
+- **Do not use Edit/Read immediately after Write** on the same file — this is the primary trigger. If you need to create a file and immediately modify it — write the full content in a single Write call
+- When creating a new file via Write — **wait** (`sync && sleep 1`) before Edit/Read on that file
+- Alternative: create files via `bash` (`cat > file << 'EOF'`), this uses a single system call and avoids the issue
 
-**Если файл уже повреждён** (не удаётся прочитать/отредактировать):
-1. Попробуй сохранить данные через `cat` (часто работает, даже когда `stat`/`cp` падают): `cat file.md > file.md.bak`
-2. Если `cat` тоже не работает — содержимое уже есть в контексте (результат предыдущего Read), запиши его в `.bak`
-3. Удали оригинал: `rm file.md`
-4. Отредактируй копию `.bak`
-5. Переименуй: `mv file.md.bak file.md`
-6. **Никогда** не пересоздавай файл с нуля по памяти — всегда сохраняй данные одним из способов выше
+**If a file is already corrupted** (cannot read/edit):
+1. Try saving data via `cat` (often works even when `stat`/`cp` fail): `cat file.md > file.md.bak`
+2. If `cat` also fails — the content is already in context (from a previous Read result), write it to `.bak`
+3. Delete the original: `rm file.md`
+4. Edit the `.bak` copy
+5. Rename: `mv file.md.bak file.md`
+6. **Never** recreate a file from scratch by memory — always preserve data using one of the methods above
 
-## Правила коммитов
+## Commit Rules
 
-- Сообщения на русском языке
-- Краткое описание изменения (примеры: "Добавлен C2 уровень Совета Мудрых", "Добавил dev container")
+- Messages in English
+- Brief description of the change (examples: "Add C2 level for the Council of the Wise", "Add dev container")

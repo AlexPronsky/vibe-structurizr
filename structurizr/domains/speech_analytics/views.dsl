@@ -1,16 +1,16 @@
-// Диаграммы Слухачей
+// Listener diagrams
 
-systemContext aragorn_palantir "aragorn_palantir_system" "Палантир Арагорна: обзор" {
+systemContext aragorn_palantir "aragorn_palantir_system" "Aragorn's Palantir: overview" {
     include *
     exclude relationship.tag==Dataflow
 }
 
-container aragorn_palantir "aragorn_palantir_containers" "Палантир Арагорна: архитектура" {
+container aragorn_palantir "aragorn_palantir_containers" "Aragorn's Palantir: architecture" {
     include *
     exclude relationship.tag==Dataflow
 }
 
-container aragorn_palantir "aragorn_palantir_dataflow" "Палантир Арагорна: инфопотоки" {
+container aragorn_palantir "aragorn_palantir_dataflow" "Aragorn's Palantir: data flows" {
     include *
     exclude relationship.tag!=Dataflow
 }

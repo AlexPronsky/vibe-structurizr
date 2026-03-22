@@ -1,125 +1,127 @@
-# Architecture as Code + LLM: демо-репозиторий
+# Architecture as Code + LLM: Demo Repository
 
-Демо-репозиторий к статье на Хабре: **«Вы знали, что с помощью LLM можно вывести подход Architecture as Code на новый уровень?»**
+Demo repository for the article: **"Did you know that LLMs can take the Architecture as Code approach to the next level?"**
 
-Репозиторий демонстрирует подход к автоматизации архитектурной работы с помощью **Structurizr DSL** (Architecture as Code) и **Claude Code** (LLM-ассистент). Архитектура описана на примере IT-ландшафта Средиземья.
+This repository demonstrates an approach to automating architectural work using **Structurizr DSL** (Architecture as Code) and **Claude Code** (LLM assistant). The architecture is described using the IT landscape of Middle-earth as an example.
 
-## Идея
+**Other languages:**
+- [`Russian version`](https://github.com/AlexPronsky/vibe-structurizr/tree/main-ru)
 
-Архитектор тратит до 80% времени не на принятие решений, а на их оформление: рисование диаграмм, заполнение таблиц, синхронизацию артефактов, итерации по замечаниям. Подход **Architecture as Code** переводит архитектуру из картинок в код, а **LLM-агент** берёт на себя рутину: генерацию DSL-кода, создание черновиков документов и предварительное ревью.
+## Concept
 
-## Структура проекта
+Architects spend up to 80% of their time not on making decisions, but on documenting them: drawing diagrams, filling in tables, synchronizing artifacts, iterating on review comments. The **Architecture as Code** approach transforms architecture from pictures into code, and an **LLM agent** takes over the routine: generating DSL code, creating document drafts, and performing preliminary reviews.
+
+## Project Structure
 
 ```
 structurizr/
-  workspace.dsl              # Главный файл — собирает всё через !include
-  workspace.json             # Координаты элементов на диаграммах (auto-save из UI)
-  common.dsl                 # Общие акторы и внешние системы (народы Средиземья)
-  domains/                   # Архитектурные домены
-    genai/                   #   Энты-Советники, Целитель Элронд, Летописец Бильбо
-    agents/                  #   Братство Кольца, Перекрёсток Бри
-    mlops_and_classic_ml/    #   Кольца Власти, Эльфийские Клинки
-    ocr/                     #   Руны Гномов
-    speech_analytics/        #   Слухачи Изенгарда, Палантир Арагорна
+  workspace.dsl              # Main file — assembles everything via !include
+  workspace.json             # Element coordinates on diagrams (auto-save from UI)
+  common.dsl                 # Common actors and external systems (peoples of Middle-earth)
+  domains/                   # Architectural domains
+    genai/                   #   Ent Advisors, Elrond the Healer, Bilbo the Chronicler
+    agents/                  #   Fellowship of the Ring, Crossroads of Bree
+    mlops_and_classic_ml/    #   Rings of Power, Elven Blades
+    ocr/                     #   Dwarven Runes
+    speech_analytics/        #   Isengard Listeners, Aragorn's Palantir
 
-solutions/                   # Проектные решения
-  index.md                   #   Сводный реестр решений
-  NNN_Название/
-    input/                   #   Бизнес-требования (БТ) и схемы процессов
-    output/                  #   Архитектурные решения (АР)
+solutions/                   # Design solutions
+  index.md                   #   Solution registry
+  NNN_Name/
+    input/                   #   Business requirements (BR) and process diagrams
+    output/                  #   Solution architecture documents (SAD)
 
 scripts/
-  validate-dsl.sh            # Валидация DSL через Structurizr API
-  export-svg.sh              # Экспорт диаграмм в SVG (Puppeteer)
-  export-diagrams.js         # JS-скрипт экспорта
+  validate-dsl.sh            # DSL validation via Structurizr API
+  export-svg.sh              # Diagram export to SVG (Puppeteer)
+  export-diagrams.js         # JS export script
 
 docs/
-  Стандарты ИБ/                 # Стандарты ИБ, которые учитываются при ревью
-  Стандарты корп. архитектуры/  # Корп. стандраты, которые учитываются при ревью
+  Security Standards/           # Security standards considered during review
+  Corporate Architecture Standards/  # Corporate standards considered during review
 
 .claude/
   skills/                    # Claude Code Skills
-    arch-generate-solution/  #   Генерация архитектурного решения
-    arch-review-solution/    #   Архитектурное ревью по 5 ролям
-    arch-make-svg/           #   Экспорт диаграмм в SVG
-    arch-list-resources/     #   Сбор таблицы ресурсов по контейнерам
-    arch-merge-conflict/     #   Разрешение конфликтов в workspace.json
+    arch-generate-solution/  #   Solution architecture document generation
+    arch-review-solution/    #   Architecture review from 5 roles
+    arch-make-svg/           #   Diagram export to SVG
+    arch-list-resources/     #   Resource table collection from containers
+    arch-merge-conflict/     #   Conflict resolution in workspace.json
 ```
 
-## Skills — что умеет LLM-агент
+## Skills — What the LLM Agent Can Do
 
-Репозиторий содержит 5 скиллов для Claude Code, каждый из которых — инструкция на естественном языке, описывающая сложный алгоритм действий:
+The repository contains 5 skills for Claude Code, each being a natural language instruction describing a complex algorithm:
 
-| Скилл | Описание |
-|-------|----------|
-| **arch-generate-solution** | Принимает файл с бизнес-требованиями, задаёт уточняющие вопросы, правит DSL-модель, валидирует её и генерирует черновик архитектурного решения в Markdown |
-| **arch-review-solution** | Проверяет готовое решение от лица 5 ролей (Solution Architect, Enterprise Architect, ИБ, владелец смежной системы, бизнес-заказчик) и формирует таблицу замечаний |
-| **arch-make-svg** | Рендерит все Structurizr views в SVG-файлы |
-| **arch-list-resources** | Парсит DSL и собирает сводную таблицу ресурсов (CPU/GPU/RAM/SSD/Replicas) по всем контейнерам |
-| **arch-merge-conflict** | Разрешает конфликты мёржа в `workspace.json` с сохранением координат элементов |
+| Skill | Description |
+|-------|-------------|
+| **arch-generate-solution** | Takes a business requirements file, asks clarifying questions, modifies the DSL model, validates it, and generates a solution architecture document draft in Markdown |
+| **arch-review-solution** | Reviews a completed solution from the perspective of 5 roles (Solution Architect, Enterprise Architect, Security, Adjacent System Owner, Business Process Owner) and produces a findings report |
+| **arch-make-svg** | Renders all Structurizr views as SVG files |
+| **arch-list-resources** | Parses the DSL and compiles a resource summary table (CPU/GPU/RAM/SSD/Replicas) for all containers |
+| **arch-merge-conflict** | Resolves merge conflicts in `workspace.json` while preserving element coordinates |
 
-## Быстрый старт
+## Quick Start
 
-### Требования
+### Requirements
 
-- Docker и Docker Compose
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (CLI или плагин для IDE)
+- Docker and Docker Compose
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (CLI or IDE plugin)
 
-### Шаг 1. Настройка ENV и запуск Structurizr
+### Step 1. Configure ENV and Start Structurizr
 
 ```bash
 cp .env.example .env
 docker compose up -d
 ```
 
-Веб-интерфейс будет доступен на http://localhost:8080. Structurizr нужен для валидации DSL и экспорта диаграмм — скиллы вызывают его автоматически.
+The web interface will be available at http://localhost:8080. Structurizr is needed for DSL validation and diagram export — the skills call it automatically.
 
-### Шаг 2. Генерация архитектурного решения
+### Step 2. Generate a Solution Architecture Document
 
-В репозитории уже есть пример бизнес-требований: [`solutions/001_Формирование рунических схем и Свитков Заветов/input/БТ Формирование рунических схем и Свитков Заветов.md`](solutions/001_Формирование%20рунических%20схем%20и%20Свитков%20Заветов/input/БТ%20Формирование%20рунических%20схем%20и%20Свитков%20Заветов.md). Запустите скилл без параметров — он автоматически найдёт это решение и сгенерирует АР:
+The repository already includes sample business requirements: [`solutions/001_Forging Runic Diagrams and Covenant Scrolls/input/BR Forging Runic Diagrams and Covenant Scrolls.md`](solutions/001_Forging%20Runic%20Diagrams%20and%20Covenant%20Scrolls/input/BR%20Forging%20Runic%20Diagrams%20and%20Covenant%20Scrolls.md). Run the skill without parameters — it will automatically find this solution and generate a SAD:
 
 ```
 /arch-generate-solution
 ```
 
-Что произойдёт:
-1. Агент прочитает БТ и текущую C4-модель
-2. Задаст уточняющие вопросы — в какой домен разместить компоненты, какие варианты выбрать
-3. Внесёт изменения в Structurizr DSL (новые системы, контейнеры, связи)
-4. Провалидирует DSL через `scripts/validate-dsl.sh`
-5. Экспортирует диаграммы в SVG через `scripts/export-svg.sh`
-6. Сгенерирует черновик АР-документа в `solutions/NNN_Название/output/`
+What happens:
+1. The agent reads the BR and the current C4 model
+2. Asks clarifying questions — which domain to place components in, which options to choose
+3. Makes changes to the Structurizr DSL (new systems, containers, relationships)
+4. Validates the DSL via `scripts/validate-dsl.sh`
+5. Exports diagrams to SVG via `scripts/export-svg.sh`
+6. Generates a SAD document draft in `solutions/NNN_Name/output/`
 
-На выходе — обновлённая C4-модель, SVG-диаграммы (контейнеры + инфопотоки) и готовый черновик АР в Markdown.
+Output — an updated C4 model, SVG diagrams (containers + data flows), and a ready SAD draft in Markdown.
 
-### Шаг 3. Ревью архитектурного решения
+### Step 3. Review the Architecture Solution
 
-После генерации (или для любого существующего АР) запустите ревью:
+After generation (or for any existing SAD), run the review:
 
 ```
-/arch-review-solution solutions/NNN_Название
+/arch-review-solution solutions/NNN_Name
 ```
 
-Агент проведёт ревью от лица 5 ролей:
-- **Solution-архитектор** — техническое качество, декомпозиция, НФТ
-- **Enterprise-архитектор** — соответствие IT-ландшафту, переиспользование систем
-- **Специалист по ИБ** — аутентификация, секреты, защита данных
-- **Владелец смежной системы** — влияние на каждую затронутую систему
-- **Владелец бизнес-процесса** — покрытие бизнес-требований
+The agent will conduct a review from the perspective of 5 roles:
+- **Solution Architect** — technical quality, decomposition, NFRs
+- **Enterprise Architect** — alignment with IT landscape, system reuse
+- **Security Specialist** — authentication, secrets, data protection
+- **Adjacent System Owner** — impact on each affected system
+- **Business Process Owner** — coverage of business requirements
 
-На выходе — структурированный отчёт с замечаниями (критичные / существенные / незначительные / рекомендации) в `solutions/NNN_Название/output/`.
+Output — a structured report with findings (critical / significant / minor / recommendations) in `solutions/NNN_Name/output/`.
 
-## Ключевые особенности подхода
+## Key Features of the Approach
 
-- **Единый источник правды** — одна модель порождает все диаграммы (ландшафт, контейнеры, инфопотоки)
-- **Версионирование** — архитектура хранится в git, доступны diff и code review
-- **Разные представления одной модели** — через механизм тегов: одна модель, но диаграммы зависимостей и инфопотоков генерируются отдельно
-- **Автоматическая валидация** — DSL проверяется через Structurizr API, ошибки ловятся до ревью
-- **LLM-автоматизация** — генерация DSL-кода, документов и ревью через Claude Code Skills
+- **Single source of truth** — one model generates all diagrams (landscape, containers, data flows)
+- **Version control** — architecture is stored in git, enabling diff and code review
+- **Multiple views of one model** — via the tag mechanism: one model, but dependency and data flow diagrams are generated separately
+- **Automatic validation** — DSL is verified via the Structurizr API, errors are caught before review
+- **LLM automation** — DSL code, document, and review generation via Claude Code Skills
 
-## Ссылки
+## Links
 
-- [Статья на Хабре](https://habr.com/ru/companies/bcs_company/articles/1006944/) — подробный разбор подхода
-- [Structurizr](https://structurizr.com/) — инструмент для Architecture as Code в формате C4 Model
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) — LLM-ассистент с доступом к файловой системе
-- [Claude Code Skills](https://docs.anthropic.com/en/docs/claude-code/skills) — кастомные команды для Claude Code
+- [Structurizr](https://structurizr.com/) — Architecture as Code tool in C4 Model format
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) — LLM assistant with file system access
+- [Claude Code Skills](https://docs.anthropic.com/en/docs/claude-code/skills) — Custom commands for Claude Code

@@ -1,53 +1,53 @@
 ---
 name: arch-merge-conflict
-description: Объединить два коммита workspace.json, разрешив конфликты мёржа с сохранением координат элементов
+description: Merge two workspace.json commits, resolving merge conflicts while preserving element coordinates
 allowed-tools: Read, Bash, Write, Edit, AskUserQuestion, TodoWrite
 user-invocable: true
 ---
 
-# Объединение workspace.json из двух коммитов
+# Merging workspace.json from Two Commits
 
-## Задача
+## Task
 
-Объединить две версии файла `structurizr/workspace.json` из разных коммитов, разрешив конфликты мёржа так, чтобы получить валидный JSON с сохранением координат элементов.
+Merge two versions of the `structurizr/workspace.json` file from different commits, resolving merge conflicts to produce a valid JSON while preserving element coordinates.
 
-## Аргумент
+## Argument
 
-Два ID коммитов через пробел, например: `abc1234 def5678`
+Two commit IDs separated by a space, e.g.: `abc1234 def5678`
 
-Первый коммит — **основной** (его структура приоритетна), второй — **дополнительный** (из него берутся недостающие данные).
+The first commit is the **primary** (its structure takes priority), the second is **supplementary** (missing data is taken from it).
 
-Если аргументы не указаны — спроси пользователя через AskUserQuestion:
-1. ID основного коммита в git (его структура приоритетна)
-2. ID дополнительного коммита в git (из него берутся недостающие данные)
+If no arguments are provided — ask the user via AskUserQuestion:
+1. Primary commit ID in git (its structure takes priority)
+2. Supplementary commit ID in git (missing data is taken from it)
 
-## Алгоритм
+## Algorithm
 
-### Шаг 1. Получение версий файла
+### Step 1. Retrieving File Versions
 
-Извлеки содержимое `structurizr/workspace.json` из обоих коммитов:
+Extract `structurizr/workspace.json` contents from both commits:
 
 ```bash
-git show <основной_коммит>:structurizr/workspace.json > /tmp/workspace_base.json
-git show <дополнительный_коммит>:structurizr/workspace.json > /tmp/workspace_extra.json
+git show <primary_commit>:structurizr/workspace.json > /tmp/workspace_base.json
+git show <supplementary_commit>:structurizr/workspace.json > /tmp/workspace_extra.json
 ```
 
-### Шаг 2. Анализ различий
+### Step 2. Analyzing Differences
 
-1. Прочитай оба файла
-2. Определи различия:
-   - Новые элементы (id, x, y координаты)
-   - Новые связи (relationships)
-   - Новые views или изменения в существующих views
-   - Изменения в конфигурации (configuration, styles)
-3. Выведи пользователю краткую сводку различий
+1. Read both files
+2. Identify differences:
+   - New elements (id, x, y coordinates)
+   - New relationships
+   - New views or changes in existing views
+   - Changes in configuration (configuration, styles)
+3. Present a brief summary of differences to the user
 
-### Шаг 3. Объединение
+### Step 3. Merging
 
-Собери результирующий `workspace.json`, соблюдая правила:
+Assemble the resulting `workspace.json`, following these rules:
 
-1. **Основа** — версия из основного коммита
-2. **Координаты элементов** — сохрани ВСЕ координаты из обоих коммитов. Если элемент есть в обоих — приоритет у основного коммита. Координаты задаются в секциях `elements` внутри views:
+1. **Base** — version from the primary commit
+2. **Element coordinates** — preserve ALL coordinates from both commits. If an element exists in both — priority goes to the primary commit. Coordinates are defined in `elements` sections inside views:
    ```json
    "elements": [
      {
@@ -57,32 +57,32 @@ git show <дополнительный_коммит>:structurizr/workspace.json 
      }
    ]
    ```
-3. **Views** — объедини все views из обоих коммитов. Если view с одним ключом есть в обоих — приоритет у основного
-4. **Relationships** — объедини все relationships из обоих коммитов, избегая дубликатов (по vertices)
-5. **Model** — НЕ трогай, workspace.json содержит только layout-данные (координаты и views), модель хранится в DSL
+3. **Views** — merge all views from both commits. If a view with the same key exists in both — priority goes to the primary
+4. **Relationships** — merge all relationships from both commits, avoiding duplicates (by vertices)
+5. **Model** — DO NOT touch, workspace.json contains only layout data (coordinates and views), the model is stored in DSL
 
-### Шаг 4. Валидация результата
+### Step 4. Validating the Result
 
-1. Проверь, что результат — валидный JSON:
+1. Verify the result is valid JSON:
    ```bash
    python3 -c "import json; json.load(open('structurizr/workspace.json'))"
    ```
-2. Проверь, что все координаты элементов сохранены (ни один элемент не потерял x/y)
-3. Запусти валидацию DSL:
+2. Verify all element coordinates are preserved (no element lost its x/y)
+3. Run DSL validation:
    ```bash
    scripts/validate-dsl.sh
    ```
 
-### Шаг 5. Результат
+### Step 5. Result
 
-Сообщи пользователю:
-- Сколько элементов/views было в каждом коммите
-- Сколько элементов/views в результате
-- Были ли конфликты и как они разрешены
+Report to the user:
+- How many elements/views were in each commit
+- How many elements/views are in the result
+- Whether there were conflicts and how they were resolved
 
-### Шаг 6. Очистка
+### Step 6. Cleanup
 
-Удали временные файлы:
+Delete temporary files:
 ```bash
 rm -f /tmp/workspace_base.json /tmp/workspace_extra.json
 ```

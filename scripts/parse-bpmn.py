@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Парсит BPMN 2.0 XML и выводит участников, потоки сообщений и задачи."""
+"""Parses BPMN 2.0 XML and outputs participants, message flows, and tasks."""
 
 import sys
 import xml.etree.ElementTree as ET

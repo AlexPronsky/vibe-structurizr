@@ -1,19 +1,19 @@
-// Общие элементы Средиземья
+// Common elements of Middle-earth
 
-// Народы
-hobbits = person "Хоббиты Шира" "" "External"
-rangers = person "Следопыты Севера"
+// Peoples
+hobbits = person "Hobbits of the Shire" "" "External"
+rangers = person "Rangers of the North"
 
-// Общие системы
-minas_tirith_library = softwareSystem "Библиотека Минас Тирита" "" "External"
-rivendell_archives = softwareSystem "Архивы Ривенделла" "" "External"
-task_palantir = softwareSystem "Палантир Задач" "" "External"
+// Common systems
+minas_tirith_library = softwareSystem "Library of Minas Tirith" "" "External"
+rivendell_archives = softwareSystem "Archives of Rivendell" "" "External"
+task_palantir = softwareSystem "Task Palantir" "" "External"
 
-gondor_beacons = softwareSystem "Огни Гондора" "Сигнальная система" "External"
-eye_of_sauron = softwareSystem "Око Саурона" "Всевидящий шлюз магии" "External"
-istari = softwareSystem "Истари" "Маги за Морем, доступные через палантиры" "External"
+gondor_beacons = softwareSystem "Beacons of Gondor" "Signal system" "External"
+eye_of_sauron = softwareSystem "Eye of Sauron" "All-seeing gateway of magic" "External"
+istari = softwareSystem "Istari" "Wizards beyond the Sea, accessible via palantiri" "External"
 
-group "Подземные Хранилища" {
-    mines_of_moria = softwareSystem "Копи Мории" "Древнее хранилище гномов (legacy)" "External"
-    erebor_treasury = softwareSystem "Сокровищница Эребора" "Хранилище Подгорного Королевства" "External"
+group "Underground Vaults" {
+    mines_of_moria = softwareSystem "Mines of Moria" "Ancient dwarven vault (legacy)" "External"
+    erebor_treasury = softwareSystem "Treasury of Erebor" "Vault of the Kingdom Under the Mountain" "External"
 }

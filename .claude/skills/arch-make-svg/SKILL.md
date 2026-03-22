@@ -1,30 +1,30 @@
 ---
 name: arch-make-svg
-description: Экспортировать все Structurizr views в SVG-файлы
+description: Export all Structurizr views to SVG files
 allowed-tools: Read, Edit, Bash, AskUserQuestion, TodoWrite
 user-invocable: true
 ---
 
-# Экспорт диаграмм в SVG
+# Diagram Export to SVG
 
-## Задача
+## Task
 
-Экспортировать все Structurizr views в SVG-файлы в папку `structurizr/export/`.
+Export all Structurizr views to SVG files in the `structurizr/export/` folder.
 
-## Алгоритм
+## Algorithm
 
-### Шаг 1. Уточнение — стиль NotInProd
+### Step 1. Clarification — NotInProd style
 
-**Обязательно** спроси пользователя через AskUserQuestion. Не используй ответы из памяти или предыдущих сессий — всегда задавай вопрос явно:
-- **Вопрос:** «Нужно ли выделять элементы, не выведенные в прод (пунктирная рамка, полупрозрачность)?»
-- **Варианты:** «Да, выделять» / «Нет, скрыть выделение»
+**Mandatory** ask the user via AskUserQuestion. Do not use answers from memory or previous sessions — always ask explicitly:
+- **Question:** "Should elements not deployed to production be highlighted (dashed border, semi-transparent)?"
+- **Options:** "Yes, highlight" / "No, hide highlighting"
 
-### Шаг 2. Подготовка (если пользователь выбрал «Нет, скрыть выделение»)
+### Step 2. Preparation (if user chose "No, hide highlighting")
 
-Закомментируй содержимое стиля `NotInProd` в `structurizr/workspace.dsl`, чтобы элементы, не выведенные в прод, не выделялись на диаграммах:
+Comment out the contents of the `NotInProd` style in `structurizr/workspace.dsl` so that elements not deployed to production are not highlighted on diagrams:
 
 ```dsl
-// Было:
+// Before:
 element "NotInProd" {
     border dashed
     stroke "#666666"
@@ -32,7 +32,7 @@ element "NotInProd" {
     opacity 60
 }
 
-// Стало (содержимое закомментировано):
+// After (contents commented out):
 element "NotInProd" {
     // border dashed
     // stroke "#666666"
@@ -41,17 +41,17 @@ element "NotInProd" {
 }
 ```
 
-### Шаг 3. Экспорт
+### Step 3. Export
 
-Запусти экспорт диаграмм:
+Run the diagram export:
 ```bash
 scripts/export-svg.sh
 ```
 
-### Шаг 4. Восстановление (если стиль NotInProd был закомментирован на шаге 2)
+### Step 4. Restoration (if the NotInProd style was commented out in step 2)
 
-Раскомментируй содержимое стиля `NotInProd` обратно в исходное состояние (убери `// ` перед каждой строкой внутри блока).
+Uncomment the `NotInProd` style contents back to the original state (remove `// ` before each line inside the block).
 
-### Шаг 5. Результат
+### Step 5. Result
 
-Сообщи пользователю, что SVG-файлы сохранены в `structurizr/export/`, и выведи список экспортированных файлов.
+Inform the user that SVG files are saved in `structurizr/export/`, and list the exported files.

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Извлекает метки связей из SVG-диаграмм Structurizr.
+"""Extracts relationship labels from Structurizr SVG diagrams.
 
-Для containers SVG — описание + протокол каждой стрелки.
-Для dataflow SVG — INF-коды с описаниями.
-Автоматически определяет тип диаграммы по содержимому.
+For containers SVG — description + protocol of each arrow.
+For dataflow SVG — INF codes with descriptions.
+Automatically detects diagram type by content.
 
 Usage:
     python3 scripts/extract-svg-labels.py <svg-file> [<svg-file> ...]
@@ -14,7 +14,7 @@ import sys
 
 
 def extract_texts(svg_content):
-    """Извлекает текстовые метки из SVG, объединяя tspan-ы."""
+    """Extracts text labels from SVG, joining tspan elements."""
     texts = re.findall(r'<text[^>]*>(.*?)</text>', svg_content)
     results = []
     for t in texts:
@@ -39,12 +39,12 @@ def is_container_label(text):
 
 
 def extract_containers_labels(texts):
-    """Извлекает пары описание + протокол из containers SVG."""
+    """Extracts description + protocol pairs from containers SVG."""
     arrows = []
     for i, t in enumerate(texts):
         if PROTOCOL_RE.match(t):
             desc = texts[i - 1] if i > 0 else ''
-            # Пропускаем системные/контейнерные метки
+            # Skip system/container labels
             if desc in SKIP_LABELS or is_container_label(desc):
                 desc = ''
             arrows.append(f'{desc} {t}')
@@ -52,7 +52,7 @@ def extract_containers_labels(texts):
 
 
 def extract_dataflow_labels(texts):
-    """Извлекает INF-метки из dataflow SVG."""
+    """Extracts INF labels from dataflow SVG."""
     infs = []
     for t in texts:
         if re.match(r'INF\d+\.', t):
@@ -72,16 +72,16 @@ def process_file(filepath):
 
     if is_dataflow:
         labels = extract_dataflow_labels(texts)
-        print(f'Тип: dataflow ({len(labels)} инфопотоков)\n')
+        print(f'Type: dataflow ({len(labels)} data flows)\n')
         for label in labels:
             print(f'  {label}')
     elif is_containers:
         labels = extract_containers_labels(texts)
-        print(f'Тип: containers ({len(labels)} связей)\n')
+        print(f'Type: containers ({len(labels)} relationships)\n')
         for label in labels:
             print(f'  {label}')
     else:
-        print('Тип: не определён (нет INF-меток и протоколов)')
+        print('Type: unknown (no INF labels or protocols found)')
 
     print()
 

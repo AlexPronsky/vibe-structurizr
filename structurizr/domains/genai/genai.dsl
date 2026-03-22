@@ -1,94 +1,93 @@
-// Совет Мудрых
+// Council of the Wise
 
-// Системы
-prancing_pony = softwareSystem "Трактир «Гарцующий Пони»" "Пристанище путников" "External"
-green_dragon = softwareSystem "Трактир «Зелёный Дракон»" "Пристанище путников" "External"
+// Systems
+prancing_pony = softwareSystem "The Prancing Pony Inn" "Travellers' haven" "External"
+green_dragon = softwareSystem "The Green Dragon Inn" "Travellers' haven" "External"
 
-gates_of_moria = softwareSystem "Врата Мории" "Привратник входящих посланий" "External"
-council_of_elrond = softwareSystem "Совет Элронда" "Разрешение проблем" "External"
-seeing_stone = softwareSystem "Палантир Связи" "Дальновидение и дальнослышание" "External"
+gates_of_moria = softwareSystem "Gates of Moria" "Gatekeeper of incoming messages" "External"
+council_of_elrond = softwareSystem "Council of Elrond" "Problem resolution" "External"
+seeing_stone = softwareSystem "Seeing Stone" "Far-sight and far-hearing" "External"
 
-group "Совет Мудрых" {
-    ent_advisors = softwareSystem "Энты-Советники" "Мудрые создания, отвечающие на вопросы"
-    elrond_healer = softwareSystem "Целитель Элронд" "Исцеление и поддержка"
-    bilbo_chronicler = softwareSystem "Летописец Бильбо" "Летопись и толкование речей совета"
+group "Council of the Wise" {
+    ent_advisors = softwareSystem "Ent Advisors" "Wise creatures who answer questions"
+    elrond_healer = softwareSystem "Elrond the Healer" "Healing and support"
+    bilbo_chronicler = softwareSystem "Bilbo the Chronicler" "Chronicle and interpretation of council speeches"
 }
 
-mirror_of_galadriel = softwareSystem "Зеркало Галадриэль" "Кладезь мудрости Средиземья"
+mirror_of_galadriel = softwareSystem "Mirror of Galadriel" "Wellspring of Middle-earth wisdom"
 
-shire_chronicles = softwareSystem "Летопись Шира" "Хроники деяний хоббитов" "External"
-eagles_of_manwe = softwareSystem "Орлы Манвэ" "Воздушная доставка свитков" "External"
-noldor_forges = softwareSystem "Кузницы Нолдор" "" "External"
-chronicle_bot = softwareSystem "Перо-Самописец" "" "External"
-gandalf = softwareSystem "Гэндальф-Координатор" "" "External"
+shire_chronicles = softwareSystem "Shire Chronicles" "Chronicles of hobbit deeds" "External"
+eagles_of_manwe = softwareSystem "Eagles of Manwe" "Aerial scroll delivery" "External"
+noldor_forges = softwareSystem "Noldor Forges" "" "External"
+chronicle_bot = softwareSystem "Auto-Quill" "" "External"
+gandalf = softwareSystem "Gandalf the Coordinator" "" "External"
 
-// Связи систем
-rangers -> gondor_beacons "Зажигают сигнальные огни" "HTTPS"
-gondor_beacons -> gates_of_moria "Передаёт мольбы путников" "REST/HTTPS"
+// System relationships
+rangers -> gondor_beacons "Light the signal beacons" "HTTPS"
+gondor_beacons -> gates_of_moria "Forwards travellers' pleas" "REST/HTTPS"
 
-rangers -> task_palantir "Записывают задачи в Палантир" "HTTPS"
-gandalf -> task_palantir "Разбирает задачи из Палантира" "HTTPS"
-gandalf -> ent_advisors "Передаёт вопросы Энтам" "REST/HTTPS"
+rangers -> task_palantir "Record tasks in the Palantir" "HTTPS"
+gandalf -> task_palantir "Retrieves tasks from the Palantir" "HTTPS"
+gandalf -> ent_advisors "Forwards questions to the Ents" "REST/HTTPS"
 
-hobbits -> prancing_pony "Заходят в трактир" "HTTPS"
-hobbits -> green_dragon "Заходят в трактир" "HTTPS"
-prancing_pony -> gates_of_moria "Передаёт мольбы путников" "REST/HTTPS"
-green_dragon -> gates_of_moria "Передаёт мольбы путников" "REST/HTTPS"
+hobbits -> prancing_pony "Visit the inn" "HTTPS"
+hobbits -> green_dragon "Visit the inn" "HTTPS"
+prancing_pony -> gates_of_moria "Forwards travellers' pleas" "REST/HTTPS"
+green_dragon -> gates_of_moria "Forwards travellers' pleas" "REST/HTTPS"
 
-gates_of_moria -> ent_advisors "Передаёт мольбы путников" "REST/HTTPS"
-ent_advisors -> mirror_of_galadriel "Заглядывает в Зеркало" "REST/HTTPS"
-ent_advisors -> eye_of_sauron "Обращается к Оку" "REST/HTTPS"
-ent_advisors -> shire_chronicles "Запрашивает хроники" "REST/HTTPS"
+gates_of_moria -> ent_advisors "Forwards travellers' pleas" "REST/HTTPS"
+ent_advisors -> mirror_of_galadriel "Gazes into the Mirror" "REST/HTTPS"
+ent_advisors -> eye_of_sauron "Consults the Eye" "REST/HTTPS"
+ent_advisors -> shire_chronicles "Requests chronicles" "REST/HTTPS"
 
-noldor_forges -> eagles_of_manwe "Отправляет свитки с Орлами" "kafka"
-eagles_of_manwe -> ent_advisors "Доставляет свитки Энтам" "kafka"
+noldor_forges -> eagles_of_manwe "Sends scrolls with the Eagles" "kafka"
+eagles_of_manwe -> ent_advisors "Delivers scrolls to the Ents" "kafka"
 
-council_of_elrond -> elrond_healer "Направляет страждущих" "REST/HTTPS"
-elrond_healer -> eye_of_sauron "Обращается к Оку" "REST/HTTPS"
+council_of_elrond -> elrond_healer "Refers those in need" "REST/HTTPS"
+elrond_healer -> eye_of_sauron "Consults the Eye" "REST/HTTPS"
 
-seeing_stone -> bilbo_chronicler "Передаёт речи совета" "REST/HTTPS"
-bilbo_chronicler -> eye_of_sauron "Обращается к Оку" "REST/HTTPS"
-bilbo_chronicler -> chronicle_bot "Передаёт свитки"
+seeing_stone -> bilbo_chronicler "Transmits council speeches" "REST/HTTPS"
+bilbo_chronicler -> eye_of_sauron "Consults the Eye" "REST/HTTPS"
+bilbo_chronicler -> chronicle_bot "Delivers scrolls"
 
-ent_advisors -> elven_blades "Берёт Эльфийский Клинок" "HTTPS"
+ent_advisors -> elven_blades "Takes an Elven Blade" "HTTPS"
 
-mirror_of_galadriel -> minas_tirith_library "Загружает свитки из Библиотеки" "HTTPS"
-mirror_of_galadriel -> rivendell_archives "Загружает свитки из Архивов" "HTTPS"
+mirror_of_galadriel -> rivendell_archives "Loads scrolls from the Archives" "HTTPS"
 
-// Контейнеры Энтов-Советников
+// Ent Advisors containers
 !element ent_advisors {
-	// Контейнеры
-	group "Цитадель Минас Тирита" {
-		ent_core = container "Энты-Советники" "Совет мудрых энтов" "Python"
-        khazad_dum_bridge = container "Мост Казад-Дума" "Посредник между мирами" "Java"
-        anduin_crossing = container "Переправа через Андуин" "Переправа древних свитков" "Kafka Connect" "NotInProd"
-		anduin_cache = container "Тайник у Андуина" "Схрон переправленных свитков" "PostgreSQL" "DB,NotInProd"
-        anduin_stream = container "Течение Андуина" "Русло свитков" "Kafka" "Pipe,NotInProd"
+	// Containers
+	group "Citadel of Minas Tirith" {
+		ent_core = container "Ent Advisors" "Council of wise ents" "Python"
+        khazad_dum_bridge = container "Bridge of Khazad-dum" "Intermediary between worlds" "Java"
+        anduin_crossing = container "Anduin Crossing" "Ancient scroll ferry" "Kafka Connect" "NotInProd"
+		anduin_cache = container "Anduin Cache" "Cache of ferried scrolls" "PostgreSQL" "DB,NotInProd"
+        anduin_stream = container "Anduin Stream" "Scroll channel" "Kafka" "Pipe,NotInProd"
 	}
-	
-	// Связи контейнеров
-    gates_of_moria -> ent_core "Передаёт мольбы путников" "REST/HTTPS"
-    gandalf -> ent_core "Передаёт вопросы от Гэндальфа" "REST/HTTPS"
 
-	ent_core -> mirror_of_galadriel "Заглядывает в Зеркало" "REST/HTTPS"
-    ent_core -> eye_of_sauron "Обращается к Оку" "REST/HTTPS"
-    ent_core -> khazad_dum_bridge "Переходит через Мост" "REST/HTTPS"
-    khazad_dum_bridge -> shire_chronicles "Запрашивает хроники" "REST/HTTPS"
-    khazad_dum_bridge -> anduin_crossing "Запрашивает свитки с Переправы" "REST/HTTPS"
-    
-    eagles_of_manwe -> anduin_stream "Орлы сбрасывают свитки в Течение" "TCP"
-    anduin_crossing -> anduin_stream "Читает из Течения" "TCP"
-    anduin_crossing -> anduin_cache "Прячет и достаёт из Тайника" "TCP"
+	// Container relationships
+    gates_of_moria -> ent_core "Forwards travellers' pleas" "REST/HTTPS"
+    gandalf -> ent_core "Forwards questions from Gandalf" "REST/HTTPS"
 
-    // Инфопотоки
-    ent_core -> gates_of_moria "INF01. Ответы на мольбы путников" "" "Dataflow"
-    ent_core -> gandalf "INF02. Ответы на вопросы Гэндальфа" "" "Dataflow"
-    mirror_of_galadriel -> ent_core "INF03. Знания Средиземья" "" "Dataflow"
-    eye_of_sauron -> ent_core "INF04. Ответы мудрости Ока" "" "Dataflow"
-    khazad_dum_bridge -> ent_core "INF05. Свитки хроник" "" "Dataflow"
-    shire_chronicles -> khazad_dum_bridge "INF06. Хроники деяний хоббитов" "" "Dataflow"
-    eagles_of_manwe -> anduin_stream "INF07. Свитки из Кузниц Нолдор" "" "Dataflow"
-    anduin_stream -> anduin_crossing "INF08. Свитки из Русла" "" "Dataflow"
-    anduin_cache -> anduin_crossing "INF09. Свитки из Тайника" "" "Dataflow"
-    anduin_crossing -> khazad_dum_bridge "INF10. Переправленные свитки" "" "Dataflow"
+	ent_core -> mirror_of_galadriel "Gazes into the Mirror" "REST/HTTPS"
+    ent_core -> eye_of_sauron "Consults the Eye" "REST/HTTPS"
+    ent_core -> khazad_dum_bridge "Crosses the Bridge" "REST/HTTPS"
+    khazad_dum_bridge -> shire_chronicles "Requests chronicles" "REST/HTTPS"
+    khazad_dum_bridge -> anduin_crossing "Requests scrolls from the Crossing" "REST/HTTPS"
+
+    eagles_of_manwe -> anduin_stream "Eagles drop scrolls into the Stream" "TCP"
+    anduin_crossing -> anduin_stream "Reads from the Stream" "TCP"
+    anduin_crossing -> anduin_cache "Stores and retrieves from Cache" "TCP"
+
+    // Data flows
+    ent_core -> gates_of_moria "INF01. Replies to travellers' pleas" "" "Dataflow"
+    ent_core -> gandalf "INF02. Replies to Gandalf's questions" "" "Dataflow"
+    mirror_of_galadriel -> ent_core "INF03. Knowledge of Middle-earth" "" "Dataflow"
+    eye_of_sauron -> ent_core "INF04. Wisdom from the Eye" "" "Dataflow"
+    khazad_dum_bridge -> ent_core "INF05. Chronicle scrolls" "" "Dataflow"
+    shire_chronicles -> khazad_dum_bridge "INF06. Chronicles of hobbit deeds" "" "Dataflow"
+    eagles_of_manwe -> anduin_stream "INF07. Scrolls from the Noldor Forges" "" "Dataflow"
+    anduin_stream -> anduin_crossing "INF08. Scrolls from the Stream" "" "Dataflow"
+    anduin_cache -> anduin_crossing "INF09. Scrolls from Cache" "" "Dataflow"
+    anduin_crossing -> khazad_dum_bridge "INF10. Ferried scrolls" "" "Dataflow"
 }

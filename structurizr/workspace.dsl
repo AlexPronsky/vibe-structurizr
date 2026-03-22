@@ -1,4 +1,4 @@
-workspace "Средиземье" {
+workspace "Middle-earth" {
 	!identifiers hierarchical
 
 	model {
@@ -6,27 +6,27 @@ workspace "Средиземье" {
 			"structurizr.groupSeparator" "/"
 		}
 
-		// Общие элементы Средиземья
+		// Common elements of Middle-earth
 		!include "common.dsl"
 
-		// Кузницы Средиземья
+		// Forges of Middle-earth
 		!include "domains/mlops_and_classic_ml/mlops_and_classic_ml.dsl"
 
-		// Совет Мудрых
+		// Council of the Wise
 		!include "domains/genai/genai.dsl"
 
-		// Братство Кольца
+		// Fellowship of the Ring
 		!include "domains/agents/agents.dsl"
 
-		// Слухачи
+		// Listeners
 		!include "domains/speech_analytics/speech_analytics.dsl"
 
-		// Рунические Мастерские
+		// Runic Workshops
 		!include "domains/ocr/ocr.dsl"
 	}
 
 	views {
-		systemLandscape "Landscape" "Карта Средиземья" {
+		systemLandscape "Landscape" "Map of Middle-earth" {
 			include *
 			exclude relationship.tag==Dataflow
 		}
@@ -36,26 +36,26 @@ workspace "Средиземье" {
 		!include "domains/agents/views.dsl"
 		!include "domains/speech_analytics/views.dsl"
 		!include "domains/ocr/views.dsl"
-		
+
 		styles {
 			element "Person" {
 				shape person
 				background "#08427b"
 				color "#ffffff"
 			}
-			
+
 			element "Software System" {
 				shape roundedbox
 				background "#1168bd"
 				color "#ffffff"
 			}
-			
+
 			element "Container" {
 				shape roundedbox
 				background "#438dd5"
 				color "#ffffff"
 			}
-			
+
 			element "External" {
 				background "#666666"
 				color "#ffffff"
@@ -74,7 +74,7 @@ workspace "Средиземье" {
 				thickness 2
 			}
 
-			// Артефакты, ещё не покинувшие кузницу
+			// Artifacts not yet deployed to production
 			element "NotInProd" {
 				border dashed
 				stroke "#666666"
@@ -82,27 +82,27 @@ workspace "Средиземье" {
 				opacity 60
 			}
 
-			// Новые элементы — зелёный акцент
+			// New elements — green accent
 			element "New" {
 				border solid
 				stroke "#2EA44F"
 				strokeWidth 5
 			}
 
-			// Изменяемые элементы — синий акцент
+			// Changed elements — blue accent
 			element "Changed" {
 				border solid
 				stroke "#1168bd"
 				strokeWidth 5
 			}
 
-			// Новые связи — зелёная линия
+			// New relationships — green line
 			relationship "New" {
 				color "#2EA44F"
 				thickness 3
 			}
 
-			// Изменяемые связи — синяя линия
+			// Changed relationships — blue line
 			relationship "Changed" {
 				color "#1168bd"
 				thickness 3

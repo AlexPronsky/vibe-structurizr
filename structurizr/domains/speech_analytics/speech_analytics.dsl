@@ -1,45 +1,45 @@
-// Слухачи
+// Listeners
 
-// Системы
-helms_deep = softwareSystem "Хельмова Падь" "" "External"
+// Systems
+helms_deep = softwareSystem "Helm's Deep" "" "External"
 
-group "Слухачи" {
-	aragorn_palantir = softwareSystem "Палантир Арагорна" "Всевидящее толкование речей"
-	isengard_listeners = softwareSystem "Слухачи Изенгарда" "Ловцы речей Средиземья"
+group "Listeners" {
+	aragorn_palantir = softwareSystem "Aragorn's Palantir" "All-seeing speech interpretation"
+	isengard_listeners = softwareSystem "Isengard Listeners" "Speech catchers of Middle-earth"
 }
 
-// Связи систем
-helms_deep -> aragorn_palantir "Запрашивает разведданные" "REST/HTTPS"
-aragorn_palantir -> isengard_listeners "Забирает расшифровки из потока" "Kafka"
-aragorn_palantir -> eye_of_sauron "Просит Око истолковать" "REST/HTTPS"
+// System relationships
+helms_deep -> aragorn_palantir "Requests intelligence" "REST/HTTPS"
+aragorn_palantir -> isengard_listeners "Retrieves transcriptions from stream" "Kafka"
+aragorn_palantir -> eye_of_sauron "Asks the Eye to interpret" "REST/HTTPS"
 
-// Контейнеры Палантира Арагорна
+// Aragorn's Palantir containers
 !element aragorn_palantir {
-	// Контейнеры
-	group "Цитадель Минас Тирита" {
-		aragorn = container "Арагорн" "Координатор" "Java"
-		moria_vault = container "Хранилище Мории" "БД" "PostgreSQL" "DB"
-		ravens = container "Почтовые Вороны" "Очередь посланий" "RabbitMQ" "Pipe"
-		dwarf_miner = container "Гном-Рудокоп" "Рабочий" "Python"
+	// Containers
+	group "Citadel of Minas Tirith" {
+		aragorn = container "Aragorn" "Coordinator" "Java"
+		moria_vault = container "Moria Vault" "Database" "PostgreSQL" "DB"
+		ravens = container "Messenger Ravens" "Message queue" "RabbitMQ" "Pipe"
+		dwarf_miner = container "Dwarf Miner" "Worker" "Python"
 	}
-	
-	// Связи контейнеров
-	aragorn -> isengard_listeners "Забирает расшифровки из потока" "Kafka"
-	aragorn -> moria_vault "Сохраняет в Хранилище" "TCP"
-	aragorn -> ravens  "Отправляет Воронов с заданиями" "AMQP"
-	ravens -> dwarf_miner "Передаёт задания Гному" "AMQP"
-	ravens -> aragorn "Возвращает результаты Арагорну" "AMQP"
-	dwarf_miner -> eye_of_sauron "Обращается к Оку" "REST/HTTPS"
-	dwarf_miner -> ravens "Отдаёт результаты Воронам" "AMQP"
-	helms_deep -> aragorn "Запрашивает разведданные" "REST/HTTPS"
 
-	// Инфопотоки
-	isengard_listeners -> aragorn "INF01. Расшифровки речей" "" "Dataflow"
-	moria_vault -> aragorn "INF02. Расшифровки и толкования Ока" "" "Dataflow"
-	aragorn -> ravens "INF03. Задания на обработку" "" "Dataflow"
-	ravens -> dwarf_miner "INF04. Задания на обработку" "" "Dataflow"
-	eye_of_sauron -> dwarf_miner "INF05. Толкования Ока" "" "Dataflow"
-	dwarf_miner -> ravens "INF06. Толкования Ока" "" "Dataflow"
-	ravens -> aragorn "INF07. Толкования Ока" "" "Dataflow"
-	aragorn -> helms_deep "INF08. Толкования речей" "" "Dataflow"
+	// Container relationships
+	aragorn -> isengard_listeners "Retrieves transcriptions from stream" "Kafka"
+	aragorn -> moria_vault "Saves to the Vault" "TCP"
+	aragorn -> ravens  "Sends Ravens with tasks" "AMQP"
+	ravens -> dwarf_miner "Delivers tasks to the Dwarf" "AMQP"
+	ravens -> aragorn "Returns results to Aragorn" "AMQP"
+	dwarf_miner -> eye_of_sauron "Consults the Eye" "REST/HTTPS"
+	dwarf_miner -> ravens "Delivers results to Ravens" "AMQP"
+	helms_deep -> aragorn "Requests intelligence" "REST/HTTPS"
+
+	// Data flows
+	isengard_listeners -> aragorn "INF01. Speech transcriptions" "" "Dataflow"
+	moria_vault -> aragorn "INF02. Transcriptions and Eye interpretations" "" "Dataflow"
+	aragorn -> ravens "INF03. Processing tasks" "" "Dataflow"
+	ravens -> dwarf_miner "INF04. Processing tasks" "" "Dataflow"
+	eye_of_sauron -> dwarf_miner "INF05. Eye interpretations" "" "Dataflow"
+	dwarf_miner -> ravens "INF06. Eye interpretations" "" "Dataflow"
+	ravens -> aragorn "INF07. Eye interpretations" "" "Dataflow"
+	aragorn -> helms_deep "INF08. Speech interpretations" "" "Dataflow"
 }
