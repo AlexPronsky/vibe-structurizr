@@ -1,6 +1,6 @@
 # Architecture as Code + LLM: Demo Repository
 
-Demo repository for the article: **"Did you know that LLMs can take the Architecture as Code approach to the next level?"**
+Demo repository for the dev.to article: ["Did you know that LLMs can take the Architecture as Code approach to the next level?"](https://dev.to/alexey_pronsky_e3cd77bd7/did-you-know-that-llms-can-take-architecture-as-code-to-the-next-level-dc9)
 
 This repository demonstrates an approach to automating architectural work using **Structurizr DSL** (Architecture as Code) and **Claude Code** (LLM assistant). The architecture is described using the IT landscape of Middle-earth as an example.
 
@@ -122,6 +122,7 @@ Output — a structured report with findings (critical / significant / minor / r
 
 ## Links
 
+- [The Article](https://dev.to/alexey_pronsky_e3cd77bd7/did-you-know-that-llms-can-take-architecture-as-code-to-the-next-level-dc9)
 - [Structurizr](https://structurizr.com/) — Architecture as Code tool in C4 Model format
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) — LLM assistant with file system access
 - [Claude Code Skills](https://docs.anthropic.com/en/docs/claude-code/skills) — Custom commands for Claude Code
